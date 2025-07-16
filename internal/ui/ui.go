@@ -63,13 +63,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					for _, b := range m.results {
 						out := fmt.Sprintf("%s - %s\n", b.BusinessName, b.URL)
 						fmt.Printf("\n" + out)
+			/*SORRY ME, CLOSING THESE {} ARE TERRIBLE*/
+					}
 				}
-		}
 
-
+				}
 			}
 		}
-	}
 
 		switch m.currentState {
 		case stateZipInput:
@@ -155,7 +155,7 @@ func (m model) View() string {
 
 	return b.String()
 }
-
+// similarly to the searchForJobPages function, might move isValid funcs to the utils package
 func isValidZip(zip string) bool {
 	return len(zip) == 5
 }
@@ -174,6 +174,7 @@ type doneMsg struct{
 	Err        error
 }
 
+// it might be cleaner to move this function into the utils package and just call it with zip and radius args from the model
 func searchForJobPages(zip, radius string) tea.Cmd {
     return func() tea.Msg {
         r, err := strconv.Atoi(radius)
@@ -216,4 +217,3 @@ func Run() {
 		os.Exit(1)
 	}
 }
-

@@ -1,7 +1,9 @@
 // defines Lipgloss styles for consistent UI formatting.
 package ui
 
-import "github.com/charmbracelet/lipgloss"
+import(
+	"github.com/charmbracelet/lipgloss"
+)
 
 var (
 	TitleStyle = lipgloss.NewStyle().
