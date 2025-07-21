@@ -1,4 +1,4 @@
-// applies heuristic to locate job/career pages.
+// applies heuristic to locate job/career pages. 
 package web
 
 var JobPageKeywords = []string{"careers", "jobs", "join-us", "employment"}

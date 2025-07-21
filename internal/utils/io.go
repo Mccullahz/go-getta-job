@@ -40,11 +40,11 @@ func DeleteOldestResults(dir string) error {
 		return fmt.Errorf("no result files found")
 	}
 
-	// Sort files by name in ascending order
+	// sort files by name in ascending order
 	sort.Slice(files, func(i, j int) bool {
 		return files[i] < files[j]
 	})
-	// Keep only the newest file
+	// keep only the newest file
 	if len(files) > 1 {
 
 	}
