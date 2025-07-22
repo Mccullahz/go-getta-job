@@ -32,8 +32,8 @@ type ZippoResponse struct {
 
 // zippopotamus api allows us to extract coordinate data from a zip code. connect to the api via net/http, parse lat/lgn data from the response, and return it
 func GetCoordinatesFromZip(zip string) (float64, float64, error) {
-	url := fmt.Sprintf("https://api.zippopotam.us/us/%s", zip)
-	resp, err := http.Get(url)
+	zpURL := fmt.Sprintf("https://api.zippopotam.us/us/%s", zip)
+	resp, err := http.Get(zpURL)
 	if err != nil {
 		return 0, 0, fmt.Errorf("HTTP request failed: %w", err)
 	}
@@ -64,14 +64,26 @@ func GetCoordinatesFromZip(zip string) (float64, float64, error) {
 }
 
 // overpass api to locate businesses around x radius of a lat/lgn point, send a query to the overpass api, parse the response, and return a list of businesses to results.json
+// we can use the Overpass API quite similarly to how we used the Zippopotamus API using net/http
+// expected error to be handled: Error: encoding error: Your input contains only whitespace." which just means "no query was given")
 func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) {
 	fmt.Printf("Searching businesses around %.4f, %.4f within %dkm radius\n", lat, lon, radius)
 	// TODO: Overpass logic
+	// geoData should be the lat lon and radius from zippo + user input here I believe
+	geoData := fmt.Sprintf("[out:json];node(around:%d,%.4f,%.4f)[amenity=all];out;", radius*1000, lat, lon)
+	opURL := fmt.Sprintf("https://overpass-api.de/api/interpreter?data=" + geoData)
+	// minimal example of how to use the overpass api
+	resp, err := http.Get(opURL)
+	if err != nil {
+		return nil, fmt.Errorf("HTTP request failed: %w", err)
+	}
+	defer resp.Body.Close()
 
-
-	// just returning example data for now
+	// return all the businesses found in the response
 	return []Business{
 		{Name: "Example Business", URL: "https://examplebuz.com/careers"},
+
+
 	}, nil
 }
 

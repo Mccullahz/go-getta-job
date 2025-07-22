@@ -10,7 +10,7 @@ import (
 	"golang.org/x/net/html"
 )
 
-// ScrapeWebsite attempts to find a job-related page (careers, jobs, hiring) on the given site.
+// attempt to find a job-related page (careers, jobs, hiring) on the given site.
 func ScrapeWebsite(url string) (string, error) {
 	resp, err := http.Get(url)
 	if err != nil {

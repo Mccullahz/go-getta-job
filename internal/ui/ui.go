@@ -155,7 +155,7 @@ func (m model) View() string {
 
 	return b.String()
 }
-// similarly to the searchForJobPages function, might move isValid funcs to the utils package
+// similarly to the searchForJobPages function below, might move isValid funcs to the utils package
 func isValidZip(zip string) bool {
 	return len(zip) == 5
 }
@@ -182,7 +182,11 @@ func searchForJobPages(zip, radius string) tea.Cmd {
             return doneMsg{Err: fmt.Errorf("invalid radius: %w", err)}
         }
 
-        businesses, err := geo.LocateBusinesses(zip, r)
+	lat, lon, err := geo.GetCoordinatesFromZip(zip)
+		if err != nil {
+			return doneMsg{Err: fmt.Errorf("failed to get coordinates for ZIP %s: %w", zip, err)}
+		}
+        businesses, err := geo.LocateBusinesses(lat, lon, r)
         return doneMsg{
             Businesses: businesses,
             Err:        err,
