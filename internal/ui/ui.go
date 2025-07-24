@@ -8,7 +8,6 @@ import (
 	"strconv"
 	"cliscraper/internal/geo"
 	"cliscraper/internal/web"
-	"cliscraper/internal/output"
 	"cliscraper/internal/utils"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -29,7 +28,7 @@ type model struct {
 	radius       string
 	err          string
 	businesses   []geo.Business
-	results      []output.JobPageResult
+	results      []utils.JobPageResult
 	showResults  bool
 }
 
@@ -113,15 +112,15 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		} else {
 			m.currentState = stateDone
 			m.businesses = msg.Businesses
-			var results []output.JobPageResult
+			var results []utils.JobPageResult
 			for _, b := range msg.Businesses {
-				results = append(results, output.JobPageResult{
+				results = append(results, utils.JobPageResult{
 					BusinessName: b.Name,
 					URL:          b.URL,
 					Description:  "Auto-discovered from scan",
 				})
 			}
-			if err := output.WriteResults(results, "./output"); err != nil {
+			if err := utils.WriteResults(results, "./output"); err != nil {
 				m.err = "Failed to write results: " + err.Error()
 			}
 		}
@@ -192,19 +191,19 @@ func searchForJobPages(zip, radius string) tea.Cmd {
             Err:        err,
         }
 	
-	var results []output.JobPageResult
+	var results []utils.JobPageResult
 	for _, b := range businesses {
 			jobURL, err := web.ScrapeWebsite(b.URL)
 			if err != nil || jobURL == "" {
 				continue
 			}
-			results = append(results, output.JobPageResult{
+			results = append(results, utils.JobPageResult{
 				BusinessName: b.Name,
 				URL:          jobURL,
 				Description:  "Auto-discovered from scan",
 			})
 			}
-		if err := output.WriteResults(results, "./output"); err != nil {
+		if err := utils.WriteResults(results, "./output"); err != nil {
 			return doneMsg{Err: fmt.Errorf("failed to write results: %w", err)}
 		}
 			return doneMsg{	

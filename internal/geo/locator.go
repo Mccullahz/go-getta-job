@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"io"
 	"strconv"
+
+	"cliscraper/internal/utils"
 )
 
 type Business struct {
@@ -63,28 +65,31 @@ func GetCoordinatesFromZip(zip string) (float64, float64, error) {
 	return lat, lon, nil
 }
 
-// overpass api to locate businesses around x radius of a lat/lgn point, send a query to the overpass api, parse the response, and return a list of businesses to results.json
-// we can use the Overpass API quite similarly to how we used the Zippopotamus API using net/http
+// overpass api to locate businesses around x radius of a lat/lgn point, send a query to the overpass api, parse the response, and return a list of businesses to geo-results.json
+// geoData should be the lat lon from zippo + radius from user input. OverPass is going to read this distance in meters, so we need to convert to miles. -- 1 mile = 1609.34 meters, so we can multiply the radius by 1609.34 to get the distance in meters.
 // expected error to be handled: Error: encoding error: Your input contains only whitespace." which just means "no query was given")
 func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) {
 	fmt.Printf("Searching businesses around %.4f, %.4f within %dkm radius\n", lat, lon, radius)
-	// TODO: Overpass logic
-	// geoData should be the lat lon and radius from zippo + user input here I believe
-	geoData := fmt.Sprintf("[out:json];node(around:%d,%.4f,%.4f)[amenity=all];out;", radius*1000, lat, lon)
+	geoData := fmt.Sprintf("[out:json];node(around:%d,%f,%f);out;", radius*1609, lat, lon)
 	opURL := fmt.Sprintf("https://overpass-api.de/api/interpreter?data=" + geoData)
-	// minimal example of how to use the overpass api
+
 	resp, err := http.Get(opURL)
 	if err != nil {
 		return nil, fmt.Errorf("HTTP request failed: %w", err)
 	}
 	defer resp.Body.Close()
 
-	// return all the businesses found in the response
-	return []Business{
-		{Name: "Example Business", URL: "https://examplebuz.com/careers"},
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("reading response failed: %w", err)
+		}
 
+	if err := utils.WriteGeoResults(body); err != nil {
+		return nil, fmt.Errorf("writing geo results failed: %w", err)
+	}
 
-	}, nil
+	return nil, nil
+
 }
 
 
