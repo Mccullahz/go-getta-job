@@ -66,8 +66,27 @@ func WriteResults(results []JobPageResult, outDir string) error {
 
 } 
 
-func WriteGeoResults(data []byte) error {
-	return os.WriteFile("geo_results.json", data, 0644)
+// lets make this better, ensure we are writing the files similar to the results file above
+func WriteGeoResults(data []byte, outDir string) error {
+	if err := os.MkdirAll(outDir, os.ModePerm); err != nil {
+		return fmt.Errorf("Failed to create output directory: %w", err)
+	}
+
+	filename := fmt.Sprintf("%s/geo_results_%d.json", outDir, time.Now().Unix())
+	file, err := os.Create(filename)
+	if err != nil {
+		return fmt.Errorf("Failed to create geo results file: %w", err)
+	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ")
+
+	if err := encoder.Encode(data); err != nil {
+		return fmt.Errorf("Failed to write Geo results to file: %w", err)
+	}
+
+	return nil
 }
 
 func DeleteOldestResults(dir string) error {

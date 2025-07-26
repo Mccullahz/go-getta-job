@@ -69,10 +69,9 @@ func GetCoordinatesFromZip(zip string) (float64, float64, error) {
 // geoData should be the lat lon from zippo + radius from user input. OverPass is going to read this distance in meters, so we need to convert to miles. -- 1 mile = 1609.34 meters, so we can multiply the radius by 1609.34 to get the distance in meters.
 // expected error to be handled: Error: encoding error: Your input contains only whitespace." which just means "no query was given")
 func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) {
-	fmt.Printf("Searching businesses around %.4f, %.4f within %dkm radius\n", lat, lon, radius)
+	fmt.Printf("Searching businesses around %.4f, %.4f within the specified %d mile radius\n", lat, lon, radius)
 	geoData := fmt.Sprintf("[out:json];node(around:%d,%f,%f);out;", radius*1609, lat, lon)
 	opURL := fmt.Sprintf("https://overpass-api.de/api/interpreter?data=" + geoData)
-
 	resp, err := http.Get(opURL)
 	if err != nil {
 		return nil, fmt.Errorf("HTTP request failed: %w", err)
@@ -84,7 +83,8 @@ func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) 
 		return nil, fmt.Errorf("reading response failed: %w", err)
 		}
 
-	if err := utils.WriteGeoResults(body); err != nil {
+	if err := utils.WriteGeoResults(body, "output");
+	err != nil {
 		return nil, fmt.Errorf("writing geo results failed: %w", err)
 	}
 
