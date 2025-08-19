@@ -2,6 +2,7 @@
 package utils
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -66,24 +67,23 @@ func WriteResults(results []JobPageResult, outDir string) error {
 
 } 
 
-// lets make this better, ensure we are writing the files similar to the results file above
+//lets make this better, ensure we are writing the files similar to the results file above
 func WriteGeoResults(data []byte, outDir string) error {
+	// Ensure output directory exists
 	if err := os.MkdirAll(outDir, os.ModePerm); err != nil {
-		return fmt.Errorf("Failed to create output directory: %w", err)
+		return fmt.Errorf("failed to create output directory: %w", err)
+	
+	}
+	var prettyJSON bytes.Buffer
+	if err := json.Indent(&prettyJSON, data, "", "  "); err != nil {
+		return fmt.Errorf("failed to pretty-print Geo results: %w", err)
 	}
 
-	filename := fmt.Sprintf("%s/geo_results_%d.json", outDir, time.Now().Unix())
-	file, err := os.Create(filename)
-	if err != nil {
-		return fmt.Errorf("Failed to create geo results file: %w", err)
-	}
-	defer file.Close()
+	filename := fmt.Sprintf("geo_results_%d.json", time.Now().Unix())
+	filePath := filepath.Join(outDir, filename)
 
-	encoder := json.NewEncoder(file)
-	encoder.SetIndent("", "  ")
-
-	if err := encoder.Encode(data); err != nil {
-		return fmt.Errorf("Failed to write Geo results to file: %w", err)
+	if err := os.WriteFile(filePath, prettyJSON.Bytes(), 0644); err != nil {
+		return fmt.Errorf("failed to write Geo results to file: %w", err)
 	}
 
 	return nil

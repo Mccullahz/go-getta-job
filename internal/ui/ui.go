@@ -48,25 +48,16 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.String() {
 		case "q", "Q", "ctrl+c":
 			return m, tea.Quit
-		// F key to show results SUBOPTIMAL WAY TO DO THIS, STRING BUILDER BROKEN
 		case "f", "F":
 			if m.currentState == stateDone {
-				results, err := utils.LoadLatestResults("./output") //borked
+				results, err := utils.LoadLatestResults("./output")
 				if err != nil {
 					m.err = "Failed to load results: " + err.Error()
 				} else {
-				m.results = results
-				m.showResults = true
-
-				if m.showResults && len(m.businesses) > 0 {
-					for _, b := range m.results {
-						out := fmt.Sprintf("%s - %s\n", b.BusinessName, b.URL)
-						fmt.Printf("\n" + out)
-			/*SORRY ME, CLOSING THESE {} ARE TERRIBLE*/
-					}
+					m.results = results
+					m.showResults = true
 				}
-
-				}
+				return m, nil
 			}
 		}
 
@@ -87,22 +78,17 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.zip += msg.String()
 			}
 
-		case stateRadiusInput:
-			if msg.Type == tea.KeyEnter {
-				if isValidRadius(m.radius) {
-					m.currentState = stateSearching
-					m.err = ""
-					return m, searchForJobPages(m.zip, m.radius)
-				} else {
-					m.err = "Radius must be a number"
-				}
-			} else if msg.Type == tea.KeyBackspace || msg.Type == tea.KeyDelete {
-				if len(m.radius) > 0 {
-					m.radius = m.radius[:len(m.radius)-1]
-				}
-			} else {
-				m.radius += msg.String()
-			}
+	case stateRadiusInput:
+	    if msg.Type == tea.KeyEnter {
+	        if isValidRadius(m.radius) {
+	            m.currentState = stateSearching
+	            m.err = ""
+	            r, _ := strconv.Atoi(m.radius) // convert string → int
+	            return m, searchForJobPages(m.zip, strconv.Itoa(r))
+	        } else {
+	            m.err = "Radius must be a number"
+	        }
+		}
 		}
 	// DONE state handling, builder for the results string used above
 	case doneMsg:
@@ -112,21 +98,20 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		} else {
 			m.currentState = stateDone
 			m.businesses = msg.Businesses
-			var results []utils.JobPageResult
-			for _, b := range msg.Businesses {
-				results = append(results, utils.JobPageResult{
-					BusinessName: b.Name,
-					URL:          b.URL,
-					Description:  "Auto-discovered from scan",
-				})
+			if len(msg.Results) == 0 {
+				m.err = "No job pages found"
+			} else {
+			results, err := utils.LoadLatestResults("./output")
+			if err == nil {
+				m.results = results
 			}
-			if err := utils.WriteResults(results, "./output"); err != nil {
-				m.err = "Failed to write results: " + err.Error()
 			}
+
 		}
 	}
 	return m, nil
 }
+
 
 // renders the current state of the UI with lipgloss styles
 func (m model) View() string {
@@ -145,6 +130,12 @@ func (m model) View() string {
 		b.WriteString(StatusStyle.Render("Searching for job pages near " + m.zip + "...\n"))
 	case stateDone:
 		b.WriteString("Search complete! Press 'F' to view results\n")
+		b.WriteString(fmt.Sprintf("%d businesses found.\n", len(m.businesses)))
+		if m.showResults {
+        	for _, r := range m.results {
+	            b.WriteString(fmt.Sprintf("%s - %s\n", r.BusinessName, r.URL))
+		}
+		}
 	}
 
 
@@ -154,6 +145,7 @@ func (m model) View() string {
 
 	return b.String()
 }
+
 // similarly to the searchForJobPages function below, might move isValid funcs to the utils package
 func isValidZip(zip string) bool {
 	return len(zip) == 5
@@ -168,51 +160,62 @@ func isValidRadius(r string) bool {
 	return r != ""
 }
 
-type doneMsg struct{
+type doneMsg struct {
 	Businesses []geo.Business
+	Results    []utils.JobPageResult
 	Err        error
 }
 
-// it might be cleaner to move this function into the utils package and just call it with zip and radius args from the model
+// now we tie geo + scraper + detector together
 func searchForJobPages(zip, radius string) tea.Cmd {
-    return func() tea.Msg {
-        r, err := strconv.Atoi(radius)
-        if err != nil {
-            return doneMsg{Err: fmt.Errorf("invalid radius: %w", err)}
-        }
+	return func() tea.Msg {
+		r, err := strconv.Atoi(radius)
+		if err != nil {
+			return doneMsg{Err: fmt.Errorf("invalid radius: %w", err)}
+		}
 
-	lat, lon, err := geo.GetCoordinatesFromZip(zip)
+		lat, lon, err := geo.GetCoordinatesFromZip(zip)
 		if err != nil {
 			return doneMsg{Err: fmt.Errorf("failed to get coordinates for ZIP %s: %w", zip, err)}
 		}
-        businesses, err := geo.LocateBusinesses(lat, lon, r)
-        return doneMsg{
-            Businesses: businesses,
-            Err:        err,
-        }
-	
-	var results []utils.JobPageResult
-	for _, b := range businesses {
+
+		businesses, err := geo.LocateBusinesses(lat, lon, r)
+		if err != nil {
+			return doneMsg{Err: err}
+		}
+
+		// scrape each business for job pages
+		var results []utils.JobPageResult
+		for i, b := range businesses {
+			if b.URL == "" {
+				continue
+			}
+
 			jobURL, err := web.ScrapeWebsite(b.URL)
 			if err != nil || jobURL == "" {
 				continue
 			}
+
+			// attach job URL back to business
+			businesses[i].URL = jobURL
+
 			results = append(results, utils.JobPageResult{
 				BusinessName: b.Name,
 				URL:          jobURL,
 				Description:  "Auto-discovered from scan",
 			})
-			}
+		}
+
 		if err := utils.WriteResults(results, "./output"); err != nil {
 			return doneMsg{Err: fmt.Errorf("failed to write results: %w", err)}
 		}
-			return doneMsg{	
-				Businesses: businesses,
-				Err:        nil,
-		}
-    }
-}
 
+		return doneMsg{
+			Businesses: businesses,
+			Err:        nil,
+		}
+	}
+}
 func Run() {
 	p := tea.NewProgram(initialModel(), tea.WithAltScreen())
 	if _, err := p.Run(); err != nil {
