@@ -4,11 +4,12 @@ package geo
 import (
 	"encoding/json"
 	"net/http"
+	"net/url"
 	"fmt"
 	"io"
 	"strconv"
-	"io/ioutil"
-	//"cliscraper/internal/utils"
+	"strings"
+	"cliscraper/internal/utils"
 )
 
 type Business struct {
@@ -70,75 +71,51 @@ func GetCoordinatesFromZip(zip string) (float64, float64, error) {
 // overpass api to locate businesses around x radius of a lat/lgn point, send a query to the overpass api, parse the response, and return a list of businesses to geo-results.json
 // geoData should be the lat lon from zippo + radius from user input. OverPass is going to read this distance in meters, so we need to convert to miles. -- 1 mile = 1609.34 meters, so we can multiply the radius by 1609.34 to get the distance in meters.
 // expected error to be handled: Error: encoding error: Your input contains only whitespace." which just means "no query was given")
-func LocateBusinesses(lat, lon float64, radius int) ([]Business, error) {
-	// miles → meters
-	radiusMeters := radius * 1609
+func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) {
+	fmt.Printf("Searching businesses around %.4f, %.4f within %d mile radius\n", lat, lon, radius)
 
-	query := fmt.Sprintf(`
-		[out:json];
-		(
-			node["amenity"]["name"](around:%d,%f,%f);
-			node["shop"]["name"](around:%d,%f,%f);
-			node["office"]["name"](around:%d,%f,%f);
-			node["craft"]["name"](around:%d,%f,%f);
-			node["tourism"]["name"](around:%d,%f,%f);
-		);
-		out;
-	`, radiusMeters, lat, lon,
-		radiusMeters, lat, lon,
-		radiusMeters, lat, lon,
-		radiusMeters, lat, lon,
-		radiusMeters, lat, lon,
+	rawQuery := fmt.Sprintf(`
+[out:json];
+(
+  node["shop"]["name"](around:%d,%f,%f);
+  node["amenity"]["name"](around:%d,%f,%f);
+  node["office"]["name"](around:%d,%f,%f);
+  node["craft"]["name"](around:%d,%f,%f);
+  node["tourism"]["name"](around:%d,%f,%f);
+);
+out;`,
+		radius*1609, lat, lon,
+		radius*1609, lat, lon,
+		radius*1609, lat, lon,
+		radius*1609, lat, lon,
+		radius*1609, lat, lon,
 	)
 
-	url := "https://overpass-api.de/api/interpreter?data=" + query
+	// collapse whitespace so it doesn’t break encoding
+	compressed := strings.Join(strings.Fields(rawQuery), " ")
 
-	resp, err := http.Get(url)
+	baseURL := "https://overpass-api.de/api/interpreter"
+	params := url.Values{}
+	params.Set("data", compressed)
+	opURL := baseURL + "?" + params.Encode()
+
+	resp, err := http.Get(opURL)
 	if err != nil {
-		return nil, fmt.Errorf("failed to query Overpass: %w", err)
+		return nil, fmt.Errorf("HTTP request failed: %w", err)
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
-		return nil, fmt.Errorf("bad Overpass response: %s", resp.Status)
-	}
-
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("reading response failed: %w", err)
 	}
 
-	var result struct {
-		Elements []struct {
-			Tags struct {
-				Name string `json:"name"`
-				URL  string `json:"website"`
-			} `json:"tags"`
-			Lat float64 `json:"lat"`
-			Lon float64 `json:"lon"`
-		} `json:"elements"`
+	if err := utils.WriteGeoResults(body, "output"); err != nil {
+		return nil, fmt.Errorf("writing geo results failed: %w", err)
 	}
 
-	if err := json.Unmarshal(body, &result); err != nil {
-		return nil, fmt.Errorf("failed to parse Overpass response: %w", err)
-	}
-
-	var businesses []Business
-	for _, el := range result.Elements {
-		if el.Tags.Name == "" {
-			continue
-		}
-		businesses = append(businesses, Business{
-			Name: el.Tags.Name,
-			URL:  el.Tags.URL,
-			Lat:  el.Lat,
-			Lon:  el.Lon,
-		})
-	}
-
-	return businesses, nil
+	return nil, nil
 }
-
 
 func FindBusinessesByZip(zip string, radius int) ([]Business, error) {
 	lat, lon, err := GetCoordinatesFromZip(zip)

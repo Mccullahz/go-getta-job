@@ -77,17 +77,26 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			} else {
 				m.zip += msg.String()
 			}
-
 	case stateRadiusInput:
-	    if msg.Type == tea.KeyEnter {
-	        if isValidRadius(m.radius) {
-	            m.currentState = stateSearching
-	            m.err = ""
-	            r, _ := strconv.Atoi(m.radius) // convert string → int
-	            return m, searchForJobPages(m.zip, strconv.Itoa(r))
-	        } else {
-	            m.err = "Radius must be a number"
-	        }
+		if msg.Type == tea.KeyEnter {
+			if isValidRadius(m.radius) {
+		            m.currentState = stateSearching
+		            m.err = ""
+		            return m, searchForJobPages(m.zip, m.radius)
+		        } else {
+		            m.err = "Radius must be a number"
+		        }
+		    } else if msg.Type == tea.KeyBackspace || msg.Type == tea.KeyDelete {
+		        if len(m.radius) > 0 {
+		            m.radius = m.radius[:len(m.radius)-1]
+		        }
+		    } else {
+		        // Only allow numeric input
+		        if msg.String() >= "0" && msg.String() <= "9" {
+		            m.radius += msg.String()
+		        } else if msg.String() == "." && !strings.Contains(m.radius, ".") {
+		            m.radius += msg.String()
+		        }
 		}
 		}
 	// DONE state handling, builder for the results string used above
