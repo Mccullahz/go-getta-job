@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"sort"
 	"os"
-	"time"
+	//"time"
 
 )
 
@@ -21,7 +21,7 @@ type JobPageResult struct {
 }
 
 func LoadLatestResults(dir string) ([]JobPageResult, error) {
-	files, err := filepath.Glob(filepath.Join(dir, "results_*.json"))
+	files, err := filepath.Glob(filepath.Join(dir, "results*.json"))
 	if err != nil || len(files) == 0 {
 		return nil,fmt.Errorf("no result files found")
 	}
@@ -49,8 +49,9 @@ func WriteResults(results []JobPageResult, outDir string) error {
 		return fmt.Errorf("Failed to create output directory: %w", err)
 	}
 
-	filename := fmt.Sprintf("%s/results_%d.json", outDir, time.Now().Unix())
-	file, err := os.Create(filename)
+	filename := "results.json"
+	filepath := filepath.Join(outDir, filename)
+	file, err := os.Create(filepath)
 	if err != nil {
 		return fmt.Errorf("Failed to create results file: %w", err)
 	}
@@ -79,8 +80,18 @@ func WriteGeoResults(data []byte, outDir string) error {
 		return fmt.Errorf("failed to pretty-print Geo results: %w", err)
 	}
 
-	filename := fmt.Sprintf("geo_results_%d.json", time.Now().Unix())
+	filename := "geo_results.json"
 	filePath := filepath.Join(outDir, filename)
+	
+	file, err := os.Create(filePath) // os.Create overwrites existing file
+	if err != nil {
+		return fmt.Errorf("failed to create results file: %w", err)
+	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ")
+
 
 	if err := os.WriteFile(filePath, prettyJSON.Bytes(), 0644); err != nil {
 		return fmt.Errorf("failed to write Geo results to file: %w", err)
