@@ -200,8 +200,6 @@ func searchForJobPages(zip, radius string) tea.Cmd {
 				continue
 			}
 
-			fmt.Printf("Scraping business: %s (%s)\n", b.Name, b.URL)
-
 			jobURL, err := web.ScrapeWebsite(b.URL)
 			if err != nil || jobURL == "" {
 				continue

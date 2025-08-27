@@ -35,6 +35,14 @@ type ZippoResponse struct {
 	Places []Places `json:"places"`
 }
 
+type OverpassResponse struct {
+	Elements []struct {
+	Lat float64 `json:"lat"`
+	Lon float64 `json:"lon"`
+	Tags map[string]string `json:"tags"`
+	} `json:"elements"`
+}
+
 // zippopotamus api allows us to extract coordinate data from a zip code. connect to the api via net/http, parse lat/lgn data from the response, and return it
 func GetCoordinatesFromZip(zip string) (float64, float64, error) {
 	zpURL := fmt.Sprintf("https://api.zippopotam.us/us/%s", zip)
@@ -94,6 +102,7 @@ out;`,
 	// collapse whitespace so it doesn’t break encoding
 	compressed := strings.Join(strings.Fields(rawQuery), " ")
 
+	// making the request and error handling
 	baseURL := "https://overpass-api.de/api/interpreter"
 	params := url.Values{}
 	params.Set("data", compressed)
@@ -114,7 +123,38 @@ out;`,
 		return nil, fmt.Errorf("writing geo results failed: %w", err)
 	}
 
-	return nil, nil
+	var opResp OverpassResponse
+	if err := json.Unmarshal(body, &opResp); err != nil {
+		return nil, fmt.Errorf("unmarshal Overpass response failed: %w", err)
+	}
+
+	// []Business is what we want to return
+	var businesses []Business
+	for _, el := range opResp.Elements {
+		name := el.Tags["name"]
+		if name == "" {
+			continue
+		}
+
+		// urls usually populate under the website tag, but sometimes under contact:website or contact:url
+		url := ""
+		if v, ok := el.Tags["website"]; ok {
+			url = v
+		} else if v, ok := el.Tags["contact:website"]; ok {
+			url = v
+		} else if v, ok := el.Tags["contact:url"]; ok {
+			url = v
+		}
+
+		businesses = append(businesses, Business{
+			Name: name,
+			URL:  url,
+			Lat:  el.Lat,
+			Lon:  el.Lon,
+		})
+	}
+
+	return businesses, nil
 }
 
 func FindBusinessesByZip(zip string, radius int) ([]Business, error) {
