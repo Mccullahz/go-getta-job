@@ -13,6 +13,7 @@ import (
 
 // take a root website URL and tries to find a careers/job page.
 func ScrapeWebsite(rootURL string) (string, error) {
+	// fetch url root and checks if responds 
 	resp, err := http.Get(rootURL)
 	if err != nil {
 		return "", fmt.Errorf("failed to fetch %s: %w", rootURL, err)
@@ -25,7 +26,7 @@ func ScrapeWebsite(rootURL string) (string, error) {
 	}
 	body := string(bodyBytes)
 
-	// if the root page itself looks like a job page
+	// if the root page itself looks like a job page (unlikely to be true)
 	if IsJobPage(rootURL, body) {
 		return rootURL, nil
 	}
@@ -61,6 +62,7 @@ func checkLink(link string) (string, bool) {
 		return "", false
 	}
 	body := string(bodyBytes)
+	fmt.Printf("Checking candidate link: %s\n", link)
 
 	if IsJobPage(link, body) {
 		return link, true
@@ -68,7 +70,7 @@ func checkLink(link string) (string, bool) {
 	return "", false
 }
 
-// parse all <a href="..."> links from the HTML body
+// this is only parsing <a href=".."> links from the HTML body
 func extractLinks(body, base string) []string {
 	var links []string
 	doc, err := html.Parse(strings.NewReader(body))
