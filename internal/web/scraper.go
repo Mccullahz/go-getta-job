@@ -26,10 +26,30 @@ func ScrapeWebsite(rootURL string) (string, error) {
 	}
 	body := string(bodyBytes)
 
-	// if the root page itself looks like a job page (unlikely to be true)
+	/*the way this WAS implemented is actually a bug in itself. adjusting this logic so we are not returning the rootURL and will return the jobURL
+	if the root is genuinely a careers page, it will still be returned.
+	if the root just mentions jobs but has a dedicated /careers or /jobs link, the scraper follows links and returns the designated jobs page.
+	only if nothing better is found does it fall back to root.
+	*/
 	if IsJobPage(rootURL, body) {
-		return rootURL, nil
-	}
+   	// Instead of returning immediately, record it as a candidate
+	    candidate := rootURL
+
+	    // parse HTML and scan links
+	    pageLinks := extractLinks(body, rootURL)
+	    for _, link := range pageLinks {
+	        for _, kw := range JobPageKeywords {
+	            if strings.Contains(strings.ToLower(link), kw) {
+	                jobURL, ok := checkLink(link)
+	                if ok {
+	                    return jobURL, nil // prefer deeper link
+	                }
+	            }
+	        }
+	    }
+    return candidate, nil // fallback: root really is the careers page
+}
+
 
 	// , parse HTML and scan links
 	pageLinks := extractLinks(body, rootURL)
