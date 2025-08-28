@@ -18,6 +18,7 @@ type state int
 const (
 	stateZipInput state = iota
 	stateRadiusInput
+	stateTitleInput
 	stateSearching
 	stateDone
 )
@@ -26,6 +27,7 @@ type model struct {
 	currentState state
 	zip          string
 	radius       string
+	title        string
 	err          string
 	businesses   []geo.Business
 	results      []utils.JobPageResult
@@ -98,6 +100,18 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		            m.radius += msg.String()
 		        }
 		}
+	case stateTitleInput:
+			// job title input handling, not currently implemented in scraping logic
+			if msg.Type == tea.KeyEnter {
+				if m.title != "" {
+					m.currentState = stateSearching
+					m.err = ""
+					return m, searchForJobPages(m.zip, m.radius)
+				} else {
+					m.err = "Job title cannot be empty"
+				}
+			}
+
 		}
 	// DONE state handling, builder for the results string used above
 	case doneMsg:
@@ -108,7 +122,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.currentState = stateDone
 			m.businesses = msg.Businesses
 			if len(msg.Results) == 0 {
-				m.err = "No job pages found"
+			// No Job Pages Found // this was procing an error even when there were no issues, so just setting to a space
+				msg.Results = []utils.JobPageResult{}
 			} else {
 			results, err := utils.LoadLatestResults("./output")
 			if err == nil {
@@ -135,6 +150,9 @@ func (m model) View() string {
 	case stateRadiusInput:
 		b.WriteString(LabelStyle.Render("Enter Search Radius (miles): "))
 		b.WriteString(InputStyle.Render(m.radius) + "\n")
+	case stateTitleInput:
+		b.WriteString(LabelStyle.Render("Enter Job Title/Keyword: "))
+		b.WriteString(InputStyle.Render(m.title) + "\n")
 	case stateSearching:
 		b.WriteString(StatusStyle.Render("Searching for job pages near " + m.zip + "...\n"))
 	case stateDone:
@@ -146,7 +164,6 @@ func (m model) View() string {
 		}
 		}
 	}
-
 
 	if m.err != "" {
 		b.WriteString("\n" + ErrorStyle.Render("Error: " + m.err) + "\n")
