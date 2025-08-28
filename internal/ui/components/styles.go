@@ -1,5 +1,5 @@
 // defines Lipgloss styles for consistent UI formatting.
-package ui
+package components
 
 import(
 	"github.com/charmbracelet/lipgloss"

@@ -1,0 +1,102 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.8 e802775f",
+  "osm3s": {
+    "timestamp_osm_base": "2025-08-28T23:09:26Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 6595374597,
+      "lat": 39.2303499,
+      "lon": -84.2593928,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "6417",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Branch Hill-Guinea Road",
+        "addr:unit": "101",
+        "amenity": "dentist",
+        "healthcare": "dentist",
+        "name": "Gentle Dentistry",
+        "operator": "Ben Kasefe, DMD"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6595374598,
+      "lat": 39.2304252,
+      "lon": -84.2594688,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "6417",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Branch Hill-Guinea Road",
+        "addr:unit": "102",
+        "name": "Exquuisite Design Salon and Spa",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6595374599,
+      "lat": 39.2308103,
+      "lon": -84.2592468,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "6415",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Branch Hill-Guinea Road",
+        "addr:unit": "104",
+        "brand": "Your Cleaners",
+        "name": "Your Cleaners",
+        "shop": "dry_cleaning",
+        "website": "http://www.yourcleanerscincy.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6595374600,
+      "lat": 39.2305180,
+      "lon": -84.2595568,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "6417",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Branch Hill-Guinea Road",
+        "addr:unit": "105",
+        "alt_name": "Performance Title Agency",
+        "name": "Performance Title",
+        "office": "insurance",
+        "website": "https://theperformancetitle.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12839187084,
+      "lat": 39.2302178,
+      "lon": -84.2582275,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "6405",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Branch Hill-Guinea Road",
+        "addr:unit": "101A",
+        "amenity": "restaurant",
+        "cuisine": "greek",
+        "name": "Mezedes"
+      }
+    }
+  ]
+}
