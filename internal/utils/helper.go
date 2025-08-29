@@ -16,3 +16,18 @@ func NormalizeURL(url string) string {
 	return url
 }
 
+func IsValidZip(zip string) bool {
+    return len(zip) == 5
+}
+
+func IsValidRadius(r string) bool {
+    if r == "" {
+        return false
+    }
+    for _, ch := range r {
+        if ch < '0' || ch > '9' {
+            return false
+        }
+    }
+    return true
+}

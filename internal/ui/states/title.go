@@ -2,19 +2,19 @@ package states
 
 import (
 	tea "github.com/charmbracelet/bubbletea"
-	"cliscraper/internal/ui"
+	"cliscraper/internal/ui/model"
 	"cliscraper/internal/ui/components"
 )
-
-func UpdateTitle(m ui.Model, msg tea.Msg) (ui.Model, tea.Cmd) {
+// handle incoming messages while in the title input state
+func UpdateTitle(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.Type {
 		case tea.KeyEnter:
 			if m.Title != "" {
-				m.CurrentState = ui.StateSearching
+				m.CurrentState = model.StateSearching
 				m.Err = ""
-				return m, ui.SearchForJobPages(m.Zip, m.Radius)
+				return m, StartSearchCmd(m.Zip, m.Radius)
 			} else {
 				m.Err = "Job title cannot be empty"
 			}
@@ -29,8 +29,8 @@ func UpdateTitle(m ui.Model, msg tea.Msg) (ui.Model, tea.Cmd) {
 	return m, nil
 }
 
-func ViewTitle(m ui.Model) string {
-	return components.LabelStyle.Render("Enter Job Title: ") +
+// render the title input view for the ui
+func ViewTitle(m model.Model) string {
+	return components.LabelStyle.Render("Enter Job Title/Keyword: ") +
 		components.InputStyle.Render(m.Title) + "\n"
 }
-

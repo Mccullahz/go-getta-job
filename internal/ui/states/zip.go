@@ -5,16 +5,16 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 	"cliscraper/internal/ui/components"
-	"cliscraper/internal/ui"
+	"cliscraper/internal/ui/model"
 )
 
-func UpdateZip(m ui.Model, msg tea.Msg) (ui.Model, tea.Cmd) {
+func UpdateZip(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.Type {
 		case tea.KeyEnter:
 			if isValidZip(m.Zip) {
-				m.CurrentState = ui.StateRadiusInput
+				m.CurrentState = model.StateRadiusInput
 				m.Err = ""
 			} else {
 				m.Err = "Invalid ZIP code"
@@ -30,7 +30,7 @@ func UpdateZip(m ui.Model, msg tea.Msg) (ui.Model, tea.Cmd) {
 	return m, nil
 }
 
-func ViewZip(m ui.Model) string {
+func ViewZip(m model.Model) string {
 	return components.LabelStyle.Render("Enter ZIP Code: ") +
 		components.InputStyle.Render(m.Zip) + "\n"
 }

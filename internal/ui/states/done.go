@@ -2,13 +2,14 @@ package states
 
 import (
 	"strings"
+	"fmt"
 
 	"cliscraper/internal/ui/model"
 	"cliscraper/internal/ui/components"
-	"fmt"
+	//"cliscraper/internal/utils"
 )
 
-func RenderDone(m model.Model) string {
+func ViewDone(m model.Model) string {
 	var b strings.Builder
 	b.WriteString("Search complete! Press 'F' to view results\n")
 	b.WriteString(fmt.Sprintf("%d businesses found.\n", len(m.Businesses)))
