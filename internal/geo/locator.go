@@ -80,7 +80,6 @@ func GetCoordinatesFromZip(zip string) (float64, float64, error) {
 // geoData should be the lat lon from zippo + radius from user input. OverPass is going to read this distance in meters, so we need to convert to miles. -- 1 mile = 1609.34 meters, so we can multiply the radius by 1609.34 to get the distance in meters.
 // expected error to be handled: Error: encoding error: Your input contains only whitespace." which just means "no query was given")
 func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) {
-	fmt.Printf("Searching businesses around %.4f, %.4f within %d mile radius\n", lat, lon, radius)
 
 	rawQuery := fmt.Sprintf(`
 [out:json];

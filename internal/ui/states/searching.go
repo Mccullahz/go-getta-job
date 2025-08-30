@@ -37,7 +37,7 @@ func UpdateSearching(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 // render the searching view for the ui
 func ViewSearching(m model.Model) string {
 	return components.StatusStyle.Render(fmt.Sprintf(
-		"Searching for job pages near ZIP %s with radius %s miles...\n",
+		"Searching for job pages near %s within radius of %s miles...\n",
 		m.Zip, m.Radius,
 	))
 }

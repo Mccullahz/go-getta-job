@@ -96,12 +96,12 @@ func (u UI) View() string {
 	}
 
 	// footer content
-	tips := "q / ctrl +c : quit"
+	tips := "q / ctrl + c : quit     f : show results (if any)     j / k + arrow keys : scroll results"
 	footer := ("\n" + components.FooterStyle.Render(tips) + "\n")
 
 	// padding footer to bottom of screen -- currently padding too far down and cannot see the main content
 	contentHeight := strings.Count(b.String(), "\n") + 1
-	paddingLines := u.Height - contentHeight - 1
+	paddingLines := u.Height - contentHeight - 2 // -2 for footer
 	if paddingLines > 0 {
 		b.WriteString(strings.Repeat("\n", paddingLines))
 	}
