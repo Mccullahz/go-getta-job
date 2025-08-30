@@ -1,3 +1,4 @@
+// this file contains the ui components for searching state along with the logic for the searching state itself
 package states
 
 import (

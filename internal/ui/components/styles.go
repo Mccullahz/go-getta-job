@@ -26,5 +26,10 @@ var (
 	ErrorStyle = lipgloss.NewStyle().
 		Foreground(lipgloss.Color("#e8404c")).
 		Bold(true)
+
+	FooterStyle = lipgloss.NewStyle().
+		Foreground(lipgloss.Color("#888888")).
+		Italic(true).
+		Align(lipgloss.Center)
 )
 

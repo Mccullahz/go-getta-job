@@ -12,7 +12,6 @@ import (
 )
 
 /* take a root website URL and tries to find a careers/job page.
-the way this WAS implemented is actually a bug in itself. adjusting this logic so we are not returning the rootURL and will return the jobURL
 if the root is genuinely a careers page, it will still be returned.
 if the root just mentions jobs but has a dedicated /careers or /jobs link, the scraper follows links and returns the designated jobs page.
 only if nothing better is found does it fall back to root.

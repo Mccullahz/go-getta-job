@@ -1,3 +1,4 @@
+// this file handles the title input state, and title viewing 
 package states
 
 import (
@@ -5,6 +6,7 @@ import (
 	"cliscraper/internal/ui/model"
 	"cliscraper/internal/ui/components"
 )
+
 // handle incoming messages while in the title input state
 func UpdateTitle(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 	switch msg := msg.(type) {

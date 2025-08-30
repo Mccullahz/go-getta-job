@@ -13,7 +13,8 @@ func ViewDone(m model.Model) string {
 	var b strings.Builder
 	b.WriteString("Search complete! Press 'F' to view results\n")
 	b.WriteString(fmt.Sprintf("%d businesses found.\n", len(m.Businesses)))
-
+	
+	// currently we are just rendering the formatted results directly, will be changing this to a list with further interaction options soon
 	if m.ShowResults {
 		b.WriteString(components.RenderResults(m.Results))
 	}
