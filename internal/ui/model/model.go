@@ -5,12 +5,14 @@ package model
 import (
     "cliscraper/internal/geo"
     "cliscraper/internal/utils"
+    "github.com/charmbracelet/bubbles/list"
 )
 
 type state int
 
 const (
-    StateZipInput state = iota
+    StateHome state = iota
+    StateZipInput
     StateRadiusInput
     StateTitleInput
     StateSearching
@@ -24,11 +26,23 @@ type Model struct {
     Title        string
     Err          string
     Businesses   []geo.Business
+
     Results      []utils.JobPageResult
     ShowResults  bool
+    ResultsList list.Model
+
+    InnerCursor int
+    TopCursor int
+
+    Width  int
+    Height int
 }
 
 func InitialModel() Model {
-    return Model{CurrentState: StateZipInput}
+    return Model{
+	CurrentState: StateHome,
+	TopCursor: 0,
+	InnerCursor: 0,
+	}
 }
 

@@ -8,16 +8,15 @@ import (
 	"cliscraper/internal/ui/components"
 )
 
-//need to feed in SearchForJobPages function from states/searching.go not from model
 func UpdateRadius(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.Type {
 		case tea.KeyEnter:
 			if isValidRadius(m.Radius) {
-				m.CurrentState = model.StateSearching
+				m.CurrentState = model.StateTitleInput
 				m.Err = ""
-				return m, StartSearchCmd(m.Zip, m.Radius)
+				return m, nil
 			} else {
 				m.Err = "Radius must be a number"
 			}

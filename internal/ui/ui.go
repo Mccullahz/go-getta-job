@@ -16,7 +16,6 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-// UI wraps model.Model so we can define methods on it
 type UI struct {
 	model.Model
 	Width       int
@@ -42,20 +41,23 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "q", "Q", "ctrl+c":
 			return u, tea.Quit
 		case "f", "F":
-			if u.CurrentState == model.StateDone && !u.ShowResults {
-				results, err := utils.LoadLatestResults("./output")
-				if err != nil {
-					u.Err = "Failed to load results: " + err.Error()
-				} else {
-					u.Results = results
-					u.ShowResults = true
-				}
-				return u, nil
-			}
+		    if u.CurrentState == model.StateDone && !u.ShowResults {
+		        results, err := utils.LoadLatestResults("./output")
+		        if err != nil {
+		            u.Err = "Failed to load results: " + err.Error()
+		        } else {
+		            u.Results = results
+		            u.ResultsList = components.NewResultsList(results, u.Width, u.Height-2)
+		            u.ShowResults = true
+		        }
+		        return u, nil
+		    }
 		}
 
 		// delegate to state updates
 		switch u.CurrentState {
+		case model.StateHome:
+			u.Model, cmd = states.UpdateHome(u.Model, msg)
 		case model.StateZipInput:
 			u.Model, cmd = states.UpdateZip(u.Model, msg)
 		case model.StateRadiusInput:
@@ -64,6 +66,12 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			u.Model, cmd = states.UpdateTitle(u.Model, msg)
 		case model.StateSearching:
 			u.Model, cmd = states.UpdateSearching(u.Model, msg)
+		case model.StateDone:
+		    if u.ShowResults {
+		        var c tea.Cmd
+		        u.ResultsList, c = u.ResultsList.Update(msg)
+		        return u, c
+		    }
 		}
 
 	case messages.DoneMsg:
@@ -79,6 +87,8 @@ func (u UI) View() string {
 
 	// main content
 	switch u.CurrentState {
+	case model.StateHome:
+		b.WriteString(states.ViewHome(u.Model))
 	case model.StateZipInput:
 		b.WriteString(states.ViewZip(u.Model))
 	case model.StateRadiusInput:
@@ -88,7 +98,11 @@ func (u UI) View() string {
 	case model.StateSearching:
 		b.WriteString(states.ViewSearching(u.Model))
 	case model.StateDone:
-		b.WriteString(states.ViewDone(u.Model))
+	    if u.ShowResults {
+	        b.WriteString(u.ResultsList.View())
+	    } else {
+	        b.WriteString(states.ViewDone(u.Model))
+	    }
 	}
 
 	if u.Err != "" {
@@ -96,10 +110,10 @@ func (u UI) View() string {
 	}
 
 	// footer content
-	tips := "q / ctrl + c : quit     f : show results (if any)     j / k + arrow keys : scroll results"
+	tips := "q / ctrl + c : quit     f : show results (if any)     j / k + h / l + arrow keys : scroll results"
 	footer := ("\n" + components.FooterStyle.Render(tips) + "\n")
 
-	// padding footer to bottom of screen -- currently padding too far down and cannot see the main content
+	// padding footer to bottom of screen
 	contentHeight := strings.Count(b.String(), "\n") + 1
 	paddingLines := u.Height - contentHeight - 2 // -2 for footer
 	if paddingLines > 0 {

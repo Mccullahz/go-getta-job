@@ -21,3 +21,15 @@ func IsJobPage(url string, body string) bool {
 	return false
 }
 
+func MatchesJobTitle(body string, titles []string) bool {
+	if len(titles) == 0 {
+		return true // no filtering → accept all
+	}
+	bodyLower := strings.ToLower(body)
+	for _, kw := range titles {
+		if strings.Contains(bodyLower, strings.ToLower(kw)) {
+			return true
+		}
+	}
+	return false
+}

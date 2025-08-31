@@ -37,13 +37,13 @@ func UpdateSearching(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 // render the searching view for the ui
 func ViewSearching(m model.Model) string {
 	return components.StatusStyle.Render(fmt.Sprintf(
-		"Searching for job pages near %s within radius of %s miles...\n",
-		m.Zip, m.Radius,
+		"Searching for %s job pages near %s within radius of %s miles...\n",
+		m.Title, m.Zip, m.Radius,
 	))
 }
 
 // return a tea.Cmd that will run the search asynchronously
-func StartSearchCmd(zip, radius string) tea.Cmd {
+func StartSearchCmd(zip, radius string, title string) tea.Cmd {
 	return func() tea.Msg {
 		r, err := strconv.Atoi(radius)
 		if err != nil {
@@ -60,12 +60,14 @@ func StartSearchCmd(zip, radius string) tea.Cmd {
 			return DoneMsg{Err: err}
 		}
 
+		titleKeywords := []string{title}
+
 		var results []utils.JobPageResult
 		for i, b := range businesses {
 			if b.URL == "" {
 				continue
 			}
-			jobURL, err := web.ScrapeWebsite(b.URL)
+			jobURL, err := web.ScrapeWebsite(b.URL, titleKeywords)
 			if err != nil || jobURL == "" {
 				continue
 			}
@@ -73,7 +75,7 @@ func StartSearchCmd(zip, radius string) tea.Cmd {
 			results = append(results, utils.JobPageResult{
 				BusinessName: b.Name,
 				URL:          jobURL,
-				Description:  "Auto-discovered from scan",
+				Description:  "Jobs page found on " + b.Name,
 			})
 		}
 

@@ -15,7 +15,7 @@ func ViewDone(m model.Model) string {
 	b.WriteString(components.LabelStyle.Render("Press 'f' to view results from the latest search.\n"))
 	// currently we are just rendering the formatted results directly, will be changing this to a list with further interaction options soon
 	if m.ShowResults {
-		b.WriteString(components.RenderResults(m.Results))
+		m.ResultsList = components.NewResultsList(m.Results, m.Width, m.Height -2)
 	}
 
 	if m.Err != "" {

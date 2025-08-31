@@ -16,7 +16,7 @@ if the root is genuinely a careers page, it will still be returned.
 if the root just mentions jobs but has a dedicated /careers or /jobs link, the scraper follows links and returns the designated jobs page.
 only if nothing better is found does it fall back to root.
 */
-func ScrapeWebsite(rootURL string) (string, error) {
+func ScrapeWebsite(rootURL string, titles []string) (string, error) {
 	// fetch url root and checks if responds 
 	resp, err := http.Get(rootURL)
 	if err != nil {
@@ -34,12 +34,16 @@ func ScrapeWebsite(rootURL string) (string, error) {
 	if IsJobPage(rootURL, body) {
 	// instead of returning immediately, record it as a candidate
 		candidate := rootURL
+
+		if MatchesJobTitle(body, titles) {
+			return candidate, nil
+		}
 		// parse HTML and scan links
 	    	pageLinks := extractLinks(body, rootURL)
 		for _, link := range pageLinks {
 			for _, kw := range JobPageKeywords {
 				if strings.Contains(strings.ToLower(link), kw) {
-					jobURL, ok := checkLink(link)
+					jobURL, ok := checkLink(link, titles)
 					if ok {
 						return jobURL, nil // prefer deeper link
 					}
@@ -56,7 +60,7 @@ func ScrapeWebsite(rootURL string) (string, error) {
 		for _, kw := range JobPageKeywords {
 			if strings.Contains(strings.ToLower(link), kw) {
 				// fetch link and confirm it’s a job page
-				jobURL, ok := checkLink(link)
+				jobURL, ok := checkLink(link, titles)
 				if ok {
 					return jobURL, nil
 				}
@@ -68,7 +72,7 @@ func ScrapeWebsite(rootURL string) (string, error) {
 }
 
 // fetch a link and applies IsJobPage
-func checkLink(link string) (string, bool) {
+func checkLink(link string, titles []string) (string, bool) {
 	resp, err := http.Get(link)
 	if err != nil {
 		return "", false
@@ -83,7 +87,7 @@ func checkLink(link string) (string, bool) {
 	// debug print
 	//fmt.Printf("Checking candidate link: %s\n", link)
 
-	if IsJobPage(link, body) {
+	if IsJobPage(link, body) && MatchesJobTitle(body, titles) {
 		return link, true
 	}
 	return "", false

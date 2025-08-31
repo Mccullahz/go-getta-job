@@ -16,7 +16,7 @@ func UpdateTitle(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 			if m.Title != "" {
 				m.CurrentState = model.StateSearching
 				m.Err = ""
-				return m, StartSearchCmd(m.Zip, m.Radius)
+				return m, StartSearchCmd(m.Zip, m.Radius, m.Title)
 			} else {
 				m.Err = "Job title cannot be empty"
 			}

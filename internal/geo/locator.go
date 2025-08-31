@@ -15,6 +15,7 @@ import (
 type Business struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
+	Titles []string `json:"titles,omitempty"`
 	Lat  float64 `json:"lat"`
 	Lon  float64 `json:"lon"`
 }
