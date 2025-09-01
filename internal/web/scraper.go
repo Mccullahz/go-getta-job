@@ -38,19 +38,7 @@ func ScrapeWebsite(rootURL string, titles []string) (string, error) {
 		if MatchesJobTitle(body, titles) {
 			return candidate, nil
 		}
-		// parse HTML and scan links
-	    	pageLinks := extractLinks(body, rootURL)
-		for _, link := range pageLinks {
-			for _, kw := range JobPageKeywords {
-				if strings.Contains(strings.ToLower(link), kw) {
-					jobURL, ok := checkLink(link, titles)
-					if ok {
-						return jobURL, nil // prefer deeper link
-					}
-				}
-			}
-		}
-    return candidate, nil // fallback: root really is the careers page OR no better link found but career keywords were present
+    return "", nil // fallback: replace "" with candidate to fallback to all job results
 	}
 
 	// parse HTML and scan links
