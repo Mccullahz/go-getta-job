@@ -38,6 +38,7 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return u, nil
 	case tea.KeyMsg:
 		switch msg.String() {
+		// need to handle quit differently in different states, curerntly global quit
 		case "q", "Q", "ctrl+c":
 			return u, tea.Quit
 		case "f", "F":
@@ -52,7 +53,32 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		        }
 		        return u, nil
 		    }
-		}
+		// using s for the time being to toggle starred state
+    		case "s":
+		        if u.CurrentState == model.StateDone && u.ShowResults {
+				idx := u.ResultsList.Index()
+				if idx >= 0 && len(u.ResultsList.Items()) > 0 {
+					if it, ok := u.ResultsList.SelectedItem().(components.JobItem); ok {
+						it.Starred = !it.Starred
+						u.ResultsList.SetItem(idx, it)
+						if it.Starred {
+							// add
+							u.Starred = append(u.Starred, it)
+						} else {
+							// remove
+							for i := range u.Starred {
+								if u.Starred[i].URL == it.URL {
+									u.Starred = append(u.Starred[:i], u.Starred[i+1:]...)
+									break
+								}
+							}
+						}
+					}
+				}
+            return u, nil
+        }
+    }
+
 
 		// delegate to state updates
 		switch u.CurrentState {

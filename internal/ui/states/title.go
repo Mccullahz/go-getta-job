@@ -1,4 +1,4 @@
-// this file handles the title input state, and title viewing 
+// this file handles the job title input state, and title viewing.
 package states
 
 import (

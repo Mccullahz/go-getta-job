@@ -14,17 +14,19 @@ import (
 type JobItem struct {
 	BusinessName string
 	URL          string
+	Starred      bool
 }
 
-// Implement list.Item
+// implement list.Item
 func (j JobItem) Title() string       { return j.BusinessName }
 func (j JobItem) Description() string { return j.URL }
 func (j JobItem) FilterValue() string { return j.BusinessName }
 
-// Styling
+// results specific styling will likely move to styles.go at some point for consistency
 var (
 	selectedStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("212")).Bold(true)
 	dimStyle      = lipgloss.NewStyle().Foreground(lipgloss.Color("240"))
+	starStyle     = lipgloss.NewStyle().Foreground(lipgloss.Color("227")).Bold(true)
 )
 
 type jobDelegate struct{}
@@ -42,14 +44,14 @@ func (d jobDelegate) Render(w io.Writer, m list.Model, index int, listItem list.
 	desc := item.URL
 
 	if index == m.Index() {
-		// Selected item highlighted
+		// hightlighting the selected item
 		fmt.Fprintf(w, "%s\n%s", selectedStyle.Render(title), desc)
 	} else {
 		fmt.Fprintf(w, "%s\n%s", dimStyle.Render(title), desc)
 	}
 }
 
-// Build a new list from results
+// build a new list from results
 func NewResultsList(results []utils.JobPageResult, width, height int) list.Model {
 	if len(results) == 0 {
 		items := []list.Item{JobItem{BusinessName: "No job pages found.", URL: ""}}

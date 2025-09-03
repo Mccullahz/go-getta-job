@@ -10,11 +10,11 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-var headers = []string{"Search", "Saved Jobs", "Settings"}
+var headers = []string{"Search", "Starred Jobs", "Settings"}
 
 var options = map[string][]string{
-	"Search":    {"Start New Search", "View Latest Results"},
-	"Saved Jobs": {"View All", "Export"},
+	"Search":    {"Start New Search", "View Last Results"},
+	"Starred Jobs": {"View All", "Export"},
 	"Settings":   {"Account Settings", "Output - Export Preferences"},
 }
 
@@ -56,6 +56,11 @@ func UpdateHome(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 			if curHeader == "Search" && curOption == "Start New Search" {
 				m.CurrentState = model.StateZipInput
 			}
+			if curHeader == "Search" && curOption == "View Last Results" {
+				m.CurrentState = model.StateDone
+			}
+			// other options to be handled later
+
 		}
 	}
 	return m, nil
@@ -84,7 +89,7 @@ func ViewHome(m model.Model) string {
 	}
 	content := strings.Join(opts, "\n")
 
-	// place everything centered horizontally
+	// place everything centered horizontally, this actually does nothing ;(
 	ui := lipgloss.Place(
 		m.Width,
 		m.Height,

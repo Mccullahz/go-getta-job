@@ -5,6 +5,7 @@ package model
 import (
     "cliscraper/internal/geo"
     "cliscraper/internal/utils"
+    "cliscraper/internal/ui/components"
     "github.com/charmbracelet/bubbles/list"
 )
 
@@ -30,6 +31,7 @@ type Model struct {
     Results      []utils.JobPageResult
     ShowResults  bool
     ResultsList list.Model
+    Starred    []components.JobItem
 
     InnerCursor int
     TopCursor int
@@ -41,6 +43,7 @@ type Model struct {
 func InitialModel() Model {
     return Model{
 	CurrentState: StateHome,
+	Starred: []components.JobItem{},
 	TopCursor: 0,
 	InnerCursor: 0,
 	}
