@@ -17,6 +17,7 @@ const (
     StateRadiusInput
     StateTitleInput
     StateSearching
+    StateStarred
     StateDone
 )
 
@@ -32,6 +33,7 @@ type Model struct {
     ShowResults  bool
     ResultsList list.Model
     Starred    []components.JobItem
+    StarredList list.Model
 
     InnerCursor int
     TopCursor int
@@ -39,6 +41,26 @@ type Model struct {
     Width  int
     Height int
 }
+
+func PreviousState(s state) state {
+	switch s {
+	case StateZipInput:
+		return StateHome
+	case StateRadiusInput:
+		return StateZipInput
+	case StateTitleInput:
+		return StateRadiusInput
+	case StateSearching:
+		return StateTitleInput
+	case StateStarred:
+		return StateHome
+	case StateDone:
+		return StateHome
+	default:
+		return StateHome
+	}
+}
+
 
 func InitialModel() Model {
     return Model{

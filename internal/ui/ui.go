@@ -38,8 +38,20 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return u, nil
 	case tea.KeyMsg:
 		switch msg.String() {
-		// need to handle quit differently in different states, curerntly global quit
-		case "q", "Q", "ctrl+c":
+		// q sends to previous state or quits if at home
+		case "q", "Q", "esc":
+			if u.CurrentState == model.StateHome {
+				return u, tea.Quit
+				} else if u.CurrentState == model.StateTitleInput{
+					//do nothing, prevent going back to radius input -- below is going back on q, need for testing starred
+					u.CurrentState = model.PreviousState(u.CurrentState)
+				} else {
+					u.CurrentState = model.PreviousState(u.CurrentState)
+					
+			return u, nil
+		}
+		// ctrl+c always quits completely
+		case "ctrl+c":
 			return u, tea.Quit
 		case "f", "F":
 		    if u.CurrentState == model.StateDone && !u.ShowResults {
@@ -92,6 +104,10 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			u.Model, cmd = states.UpdateTitle(u.Model, msg)
 		case model.StateSearching:
 			u.Model, cmd = states.UpdateSearching(u.Model, msg)
+		case model.StateStarred:
+			var c tea.Cmd
+			u.StarredList, c = u.StarredList.Update(msg)
+			return u, c
 		case model.StateDone:
 		    if u.ShowResults {
 		        var c tea.Cmd
@@ -123,6 +139,12 @@ func (u UI) View() string {
 		b.WriteString(states.ViewTitle(u.Model))
 	case model.StateSearching:
 		b.WriteString(states.ViewSearching(u.Model))
+	case model.StateStarred:
+		if len(u.StarredList.Items()) == 0 {
+			b.WriteString(components.StatusStyle.Render("No starred jobs yet.\n"))
+		} else {
+			b.WriteString(u.StarredList.View())
+		}
 	case model.StateDone:
 	    if u.ShowResults {
 	        b.WriteString(u.ResultsList.View())

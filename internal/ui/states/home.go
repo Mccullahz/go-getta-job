@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"cliscraper/internal/ui/model"
+	"cliscraper/internal/ui/components"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
@@ -58,6 +59,10 @@ func UpdateHome(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 			}
 			if curHeader == "Search" && curOption == "View Last Results" {
 				m.CurrentState = model.StateDone
+			}
+			if curHeader == "Starred Jobs" && curOption == "View All" {
+				m.StarredList = components.NewStarredList(m.Starred, m.Width, m.Height-2)
+				m.CurrentState = model.StateStarred
 			}
 			// other options to be handled later
 

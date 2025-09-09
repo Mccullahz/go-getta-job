@@ -13,13 +13,9 @@ func UpdateTitle(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch msg.Type {
 		case tea.KeyEnter:
-			if m.Title != "" {
 				m.CurrentState = model.StateSearching
 				m.Err = ""
 				return m, StartSearchCmd(m.Zip, m.Radius, m.Title)
-			} else {
-				m.Err = "Job title cannot be empty"
-			}
 		case tea.KeyBackspace, tea.KeyDelete:
 			if len(m.Title) > 0 {
 				m.Title = m.Title[:len(m.Title)-1]
@@ -33,6 +29,6 @@ func UpdateTitle(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 
 // render the title input view for the ui
 func ViewTitle(m model.Model) string {
-	return components.LabelStyle.Render("Enter Job Title/Keyword: ") +
+	return components.LabelStyle.Render("Enter Job Title/Keyword, empty for all openings: ") +
 		components.InputStyle.Render(m.Title) + "\n"
 }

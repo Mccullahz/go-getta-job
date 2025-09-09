@@ -10,6 +10,7 @@ import (
 	"cliscraper/internal/utils"
 	"fmt"
 	"strconv"
+	"strings"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -60,7 +61,11 @@ func StartSearchCmd(zip, radius string, title string) tea.Cmd {
 			return DoneMsg{Err: err}
 		}
 
-		titleKeywords := []string{title}
+		titleKeywords := []string{}
+		// only add title if not empty or whitespace
+			if strings.TrimSpace(title) != "" {
+			titleKeywords = append(titleKeywords, title)
+		}
 
 		var results []utils.JobPageResult
 		for i, b := range businesses {

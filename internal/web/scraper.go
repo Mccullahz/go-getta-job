@@ -13,8 +13,8 @@ import (
 
 /* take a root website URL and tries to find a careers/job page.
 if the root is genuinely a careers page, it will still be returned.
-if the root just mentions jobs but has a dedicated /careers or /jobs link, the scraper follows links and returns the designated jobs page.
-only if nothing better is found does it fall back to root.
+if the root just mentions jobs but has a dedicated /careers or /jobs link (etc), the scraper follows links and returns the designated jobs page.
+only if nothing better is found AND there seems to be careers does it fall back to root.
 */
 func ScrapeWebsite(rootURL string, titles []string) (string, error) {
 	// fetch url root and checks if responds 
@@ -38,7 +38,7 @@ func ScrapeWebsite(rootURL string, titles []string) (string, error) {
 		if MatchesJobTitle(body, titles) {
 			return candidate, nil
 		}
-    return "", nil // fallback: replace "" with candidate to fallback to all job results
+    //return "", nil // fallback: uncomment to always return root if it’s a job page
 	}
 
 	// parse HTML and scan links
