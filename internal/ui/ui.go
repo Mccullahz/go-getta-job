@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-
 	"cliscraper/internal/ui/model"
 	"cliscraper/internal/ui/states"
 	"cliscraper/internal/ui/components"
@@ -173,11 +172,10 @@ func (u UI) View() string {
 }
 
 // entry point passed to main.go
-func Run() {
-	p := tea.NewProgram(UI{Model: model.InitialModel()}, tea.WithAltScreen())
-	if _, err := p.Run(); err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
-	}
+func Run(svc model.Service) {
+    p := tea.NewProgram(UI{Model: model.InitialModel(svc)}, tea.WithAltScreen())
+    if _, err := p.Run(); err != nil {
+        fmt.Println("Error:", err)
+        os.Exit(1)
+    }
 }
-

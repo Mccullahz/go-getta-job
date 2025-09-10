@@ -3,7 +3,7 @@
 package messages
 
 import (
-    "cliscraper/internal/geo"
+    "cliscraper/internal/backend/geo"
     "cliscraper/internal/utils"
 )
 

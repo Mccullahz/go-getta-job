@@ -3,7 +3,7 @@
 package model
 
 import (
-    "cliscraper/internal/geo"
+    "cliscraper/internal/backend/geo"
     "cliscraper/internal/utils"
     "cliscraper/internal/ui/components"
     "github.com/charmbracelet/bubbles/list"
@@ -22,6 +22,8 @@ const (
 )
 
 type Model struct {
+    service      Service
+
     CurrentState state
     Zip          string
     Radius       string
@@ -62,12 +64,14 @@ func PreviousState(s state) state {
 }
 
 
-func InitialModel() Model {
+func InitialModel(svc Service) Model {
     return Model{
+	service: svc,
 	CurrentState: StateHome,
 	Starred: []components.JobItem{},
 	TopCursor: 0,
 	InnerCursor: 0,
 	}
 }
+
 
