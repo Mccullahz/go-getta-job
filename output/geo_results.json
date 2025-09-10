@@ -2,10 +2,1296 @@
   "version": 0.6,
   "generator": "Overpass API 0.7.62.8 e802775f",
   "osm3s": {
-    "timestamp_osm_base": "2025-08-30T00:29:39Z",
+    "timestamp_osm_base": "2025-09-07T11:12:14Z",
     "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
   },
   "elements": [
+    {
+      "type": "node",
+      "id": 256533898,
+      "lat": 39.2636090,
+      "lon": -84.2679464,
+      "tags": {
+        "access": "yes",
+        "addr:city": "Loveland",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "alt_name": "Loveland Library",
+        "amenity": "library",
+        "brand": "Public Library of Cincinnati and Hamilton County",
+        "brand:wikidata": "Q5492644",
+        "name": "Loveland Branch Library",
+        "opening_hours": "Mo-Sa 10:00-18:00",
+        "operator": "Cincinnati and Hamilton County Public Library",
+        "operator:short": "CHPL",
+        "operator:type": "public",
+        "operator:wikidata": "Q5492644",
+        "website": "https://chpl.org/locations/LV/",
+        "wikidata": "Q111357148"
+      }
+    },
+    {
+      "type": "node",
+      "id": 256533902,
+      "lat": 39.2646985,
+      "lon": -84.2675532,
+      "tags": {
+        "amenity": "bank",
+        "atm": "yes",
+        "brand": "Chase",
+        "brand:wikidata": "Q524629",
+        "drive_through": "yes",
+        "name": "Chase",
+        "old_name": "Bank One",
+        "opening_hours": "Mo-Fr 09:00-18:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 256549240,
+      "lat": 39.2678730,
+      "lon": -84.2586320,
+      "tags": {
+        "amenity": "atm",
+        "brand": "Fifth Third Bank",
+        "brand:wikidata": "Q1411810",
+        "check_date": "2021-05-23",
+        "name": "Fifth Third Bank",
+        "old_name": "Jeanie",
+        "operator": "Fifth Third Bank",
+        "operator:historic": "Fifth Third Bank",
+        "operator:wikidata": "Q1411810",
+        "operator:wikipedia": "en:Fifth Third Bank",
+        "short_name": "5/3 Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 257504320,
+      "lat": 39.2628744,
+      "lon": -84.2844281,
+      "tags": {
+        "amenity": "school",
+        "created_by": "Potlatch 0.10f",
+        "ele": "225",
+        "gnis:feature_id": "1059594",
+        "name": "Loveland Intermediate School",
+        "old_name": "Loveland Hurst Middle School",
+        "old_name1": "Loveland Hurst High School",
+        "operator": "Loveland City School District"
+      }
+    },
+    {
+      "type": "node",
+      "id": 257504321,
+      "lat": 39.2640013,
+      "lon": -84.2848455,
+      "tags": {
+        "amenity": "school",
+        "created_by": "Potlatch 0.10f",
+        "name": "Loveland Middle School",
+        "operator": "Loveland City School District"
+      }
+    },
+    {
+      "type": "node",
+      "id": 298561445,
+      "lat": 39.2670982,
+      "lon": -84.2567169,
+      "tags": {
+        "amenity": "police",
+        "name": "Historic Downtown Loveland Police Station",
+        "operator": "Loveland Police Department"
+      }
+    },
+    {
+      "type": "node",
+      "id": 309557616,
+      "lat": 39.2658975,
+      "lon": -84.2660951,
+      "tags": {
+        "amenity": "pub",
+        "food": "yes",
+        "name": "Zappz Sports Cafe",
+        "opening_hours": "Mo-Fr 11:00-02:30, Sa 12:00-02:30, Su 13:00-02:30"
+      }
+    },
+    {
+      "type": "node",
+      "id": 327909088,
+      "lat": 39.2663906,
+      "lon": -84.2676144,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "330",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland–Madeira Road",
+        "brand": "Goodwill",
+        "brand:wikidata": "Q5583655",
+        "disused:brand:wikidata": "Q3146662",
+        "name": "Goodwill",
+        "note": "Diamond in the rough.",
+        "old_name": "IGA;Thriftway",
+        "opening_hours": "Mo-Sa 09:30-21:00; Su 10:00-18:00",
+        "operator": "Ohio Valley Goodwill",
+        "phone": "+1-513-683-1151",
+        "shop": "charity",
+        "website": "https://goodwillbargains.com/locations/loveland-goodwill-store/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 352905681,
+      "lat": 39.2601936,
+      "lon": -84.2474895,
+      "tags": {
+        "amenity": "bench",
+        "backrest": "no",
+        "bench:type": "log",
+        "material": "wood",
+        "name": "Squirrel Squat"
+      }
+    },
+    {
+      "type": "node",
+      "id": 366065100,
+      "lat": 39.2611646,
+      "lon": -84.2730712,
+      "tags": {
+        "amenity": "pharmacy",
+        "brand": "Kroger",
+        "brand:wikidata": "Q153417",
+        "dispensing": "yes",
+        "drive_through": "no",
+        "healthcare": "pharmacy",
+        "name": "Kroger Pharmacy",
+        "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-18:00; Su 11:00-18:00",
+        "website": "https://www.kroger.com/stores/pharmacy/oh/loveland/014/00413"
+      }
+    },
+    {
+      "type": "node",
+      "id": 572707545,
+      "lat": 39.2640166,
+      "lon": -84.2674562,
+      "tags": {
+        "brand": "H&R Block",
+        "brand:wikidata": "Q5627799",
+        "disused:brand:wikidata": "Q1043403",
+        "disused:shop": "travel_agency",
+        "name": "H&R Block",
+        "office": "tax_advisor",
+        "old_name": "Carlson Wagonlit Travel",
+        "opening_hours:signed": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 572711080,
+      "lat": 39.2553813,
+      "lon": -84.2850945,
+      "tags": {
+        "brand": "Progressive",
+        "brand:wikidata": "Q7248721",
+        "disused:shop": "telephone",
+        "name": "Ramey Insurance Agency",
+        "office": "insurance",
+        "old_name": "VIP Cellular",
+        "website": "https://www.progressive.com/agent/local-agent/ohio/loveland/ramey-insurance-agency-45140/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 602909175,
+      "lat": 39.2635268,
+      "lon": -84.2680305,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "amenity": "restaurant",
+        "cuisine": "asian",
+        "name": "New Asian",
+        "opening_hours": "Tu-Th 11:00-21:00; Fr,Sa 11:00-22:00; Su 12:00-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 602909416,
+      "lat": 39.2625923,
+      "lon": -84.2702541,
+      "tags": {
+        "amenity": "fast_food",
+        "brand": "Marco’s Pizza",
+        "brand:wikidata": "Q6757382",
+        "cuisine": "pizza",
+        "name": "Marco’s Pizza",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 602909644,
+      "lat": 39.2619859,
+      "lon": -84.2708012,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "pizza",
+        "name": "Angilo’s Pizza"
+      }
+    },
+    {
+      "type": "node",
+      "id": 608971729,
+      "lat": 39.2624859,
+      "lon": -84.2701252,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "920",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland–Madeira Road",
+        "addr:unit": "B",
+        "amenity": "restaurant",
+        "diet:healthy": "yes",
+        "diet:vegetarian": "yes",
+        "name": "The Veg Head",
+        "note": "Not *only* vegetarian food",
+        "website": "https://www.thevegheadfoods.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 608971893,
+      "lat": 39.2629091,
+      "lon": -84.2688972,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "amenity": "veterinary",
+        "name": "Loveland Animal Hospital",
+        "opening_hours": "Mo,We,Fr 08:00-17:00; Tu 08:00-19:00; Th 10:00-19:00; Sa 08:00-11:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 669231542,
+      "lat": 39.2627740,
+      "lon": -84.2694169,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "910",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "alt_name": "Mike Amos Insurance Agency",
+        "disused:amenity": "doctors",
+        "name": "Cincinnati Family and Business Insurance",
+        "office": "insurance",
+        "old_name": "Loveland Family Practice",
+        "opening_hours": "Mo-Fr 09:00-17:00",
+        "phone": "+1-513-583-5222",
+        "short_name": "CFB Insurance",
+        "source": "local_knowledge",
+        "website": "https://cincinnatifamilybusinessinsurance.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 669231543,
+      "lat": 39.2633981,
+      "lon": -84.2681910,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "brand": "Dollar General",
+        "brand:wikidata": "Q145168",
+        "name": "Dollar General",
+        "opening_hours": "Mo-Su 08:00-21:00",
+        "shop": "variety_store",
+        "source": "local_knowledge",
+        "website": "https://www.dollargeneral.com/store-directory/oh/loveland/4544"
+      }
+    },
+    {
+      "type": "node",
+      "id": 669522413,
+      "lat": 39.2632460,
+      "lon": -84.2683809,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "675",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "brand": "Ace Hardware",
+        "brand:wikidata": "Q4672981",
+        "name": "Ace Hardware",
+        "old_name": "Hader Hardware",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 08:00-19:00; Su 10:00-18:00",
+        "phone": "+1 513-583-1415",
+        "ref": "18621",
+        "shop": "doityourself"
+      }
+    },
+    {
+      "type": "node",
+      "id": 669637546,
+      "lat": 39.2680191,
+      "lon": -84.2594244,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Karl Brown Way",
+        "craft": "photographer",
+        "level": "0",
+        "name": "Leppert Photography",
+        "shop": "photo",
+        "source": "local_knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 670952185,
+      "lat": 39.2681738,
+      "lon": -84.2595839,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "305",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "West Loveland Avenue",
+        "amenity": "cafe",
+        "level": "0",
+        "name": "Cocoa Bites",
+        "old_name": "Down Memory Lane",
+        "opening_hours": "Th,Fr 09:00-17:00; Sa 09:00-16:00",
+        "outdoor_seating": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 670960899,
+      "lat": 39.2660805,
+      "lon": -84.2677065,
+      "tags": {
+        "alt_name": "Shooters Supply Shop",
+        "name": "Loveland Shooters Supply",
+        "shop": "sports",
+        "sport": "hunting"
+      }
+    },
+    {
+      "type": "node",
+      "id": 802827599,
+      "lat": 39.2665345,
+      "lon": -84.2602205,
+      "tags": {
+        "description": "Painted canoe",
+        "name": "I’d love to be in Loveland, in a canoe with you!",
+        "operator": "Loveland Arts Council",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "node",
+      "id": 850507495,
+      "lat": 39.2661396,
+      "lon": -84.2676770,
+      "tags": {
+        "craft": "print_shop;embroidery",
+        "disused:shop": "bakery",
+        "name": "RP Diamond Printing & Embroidery",
+        "old_name": "Loveland Bake Shop",
+        "shop": "printing"
+      }
+    },
+    {
+      "type": "node",
+      "id": 850514091,
+      "lat": 39.2589635,
+      "lon": -84.2471433,
+      "tags": {
+        "artwork_type": "statue",
+        "name": "Saint Columban",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1257640995,
+      "lat": 39.2679086,
+      "lon": -84.2589656,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "207",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "West Loveland Avenue",
+        "amenity": "music_school",
+        "level": "0",
+        "name": "Loveland Music Academy",
+        "training": "music",
+        "website": "https://www.lovelandmusicacademy.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1257662662,
+      "lat": 39.2641788,
+      "lon": -84.2672528,
+      "tags": {
+        "contact:facebook": "smarthands.alterations",
+        "disused:shop": "school_supplies",
+        "name": "Smart Hands Alterations",
+        "shop": "tailor"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1258966751,
+      "lat": 39.2230254,
+      "lon": -84.2809822,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "471",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Wards Corner Road",
+        "addr:unit": "800",
+        "alt_name": "Gold Star",
+        "amenity": "fast_food",
+        "brand": "Gold Star Chili",
+        "brand:wikidata": "Q16994254",
+        "cuisine": "chili",
+        "name": "Gold Star Chili",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1329319450,
+      "lat": 39.2636076,
+      "lon": -84.2711402,
+      "tags": {
+        "name": "Bus Dispatch",
+        "office": "bus_dispatcher",
+        "operator": "Loveland City Schools"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2189459551,
+      "lat": 39.2678806,
+      "lon": -84.2588859,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "205",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "West Loveland Avenue",
+        "disused:shop": "weapons",
+        "level": "0",
+        "name": "Old Is New Antiques And Two Weathered Souls",
+        "old_name": "Loveland Shooter’s Supply",
+        "shop": "antiques",
+        "website": "https://oldisnewantiqueshop.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2189459552,
+      "lat": 39.2678585,
+      "lon": -84.2588148,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "203",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "West Loveland Avenue",
+        "craft": "engineering",
+        "disused:office": "administrative",
+        "level": "0",
+        "name": "Choice One Engineering",
+        "office": "engineer",
+        "old_name": "Ohio Bureau of Motor Vehicles",
+        "website": "https://choiceoneengineering.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2468136937,
+      "lat": 39.2560051,
+      "lon": -84.2894224,
+      "tags": {
+        "board_type": "welcome_sign",
+        "direction": "-135",
+        "information": "board",
+        "name": "Welcome to the Communities of Loveland and Symmes Township",
+        "tourism": "information"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2989191153,
+      "lat": 39.2637228,
+      "lon": -84.2677914,
+      "tags": {
+        "addr:housenumber": "641",
+        "addr:postcode": "45140",
+        "addr:street": "Loveland Madeira Road",
+        "alt_name": "Ohio BMV Deputy Registrar License Agency #1311;License Bureau",
+        "name": "BMV Deputy Registrar License Agency",
+        "office": "government",
+        "opening_hours": "Mo-Fr 08:00-17:00; Sa 08:00-12:00",
+        "operator": "Ohio Bureau of Motor Vehicles",
+        "source": "local_knowledge",
+        "website": "https://bmv.ohio.gov/13.stm"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3339204448,
+      "lat": 39.2657712,
+      "lon": -84.2678904,
+      "tags": {
+        "disused:office": "educational_institution",
+        "disused:wikidata": "Q6692161",
+        "name": "7 Hills Vapor",
+        "old_name": "Loveland Board of Education",
+        "opening_hours": "Mo-Th 10:00-20:00; Fr,Sa 10:00-21:00; Su 12:00-18:00",
+        "shop": "e-cigarette"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4071274703,
+      "lat": 39.2687789,
+      "lon": -84.2580528,
+      "tags": {
+        "amenity": "public_bookcase",
+        "brand": "Little Free Library",
+        "brand:wikidata": "Q6650101",
+        "check_date": "2023-07-30",
+        "name": "Little Free Library",
+        "network": "Little Free Library",
+        "public_bookcase:type": "reading_box"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4179183590,
+      "lat": 39.2673130,
+      "lon": -84.2572188,
+      "tags": {
+        "amenity": "ice_cream",
+        "brand": "Graeter's",
+        "brand:wikidata": "Q5592430",
+        "cuisine": "ice_cream",
+        "name": "Graeter's",
+        "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 11:00-23:00; Su 11:00-22:00",
+        "takeaway": "yes",
+        "website": "https://www.graeters.com/stores/retail-stores/loveland/loveland-station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4352249529,
+      "lat": 39.2663999,
+      "lon": -84.2458958,
+      "tags": {
+        "FIXME": "Approximate location",
+        "craft": "painter",
+        "name": "Elizabeth Robinson Studio",
+        "website": "http://www.erobinsonstudios.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4624843124,
+      "lat": 39.2662826,
+      "lon": -84.2598316,
+      "tags": {
+        "amenity": "marketplace",
+        "name": "Loveland Farmers’ Market",
+        "opening_hours": "May-Oct Tu 15:00-18:30",
+        "website": "http://www.lovelandfm.com/",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5375521885,
+      "lat": 39.2627426,
+      "lon": -84.2862858,
+      "tags": {
+        "board_type": "welcome_sign",
+        "direction": "135",
+        "information": "board",
+        "name": "Pheasant Hills",
+        "tourism": "information"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385002454,
+      "lat": 39.2692649,
+      "lon": -84.2641841,
+      "tags": {
+        "amenity": "bank",
+        "name": "Union Savings Bank",
+        "phone": "+1-513-683-1531"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269277,
+      "lat": 39.2636682,
+      "lon": -84.2678639,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "547",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "alt_name": "Nikki Singh Shah",
+        "brand": "State Farm Insurance",
+        "brand:wikidata": "Q2007336",
+        "name": "Nikki Shah Insurance",
+        "office": "insurance",
+        "opening_hours": "Mo-Fr 09:00-17:00; Sa 09:00-12:00",
+        "phone": "+1-513-683-7755",
+        "website": "https://www.nikkishah.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269278,
+      "lat": 39.2642329,
+      "lon": -84.2671806,
+      "tags": {
+        "name": "Bill's Kustom Kut Barber Shop",
+        "opening_hours": "Mo,Tu,Th,Fr 09:00-18:00; Sa 09:00-15:00",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269279,
+      "lat": 39.2638349,
+      "lon": -84.2676695,
+      "tags": {
+        "amenity": "arts_centre",
+        "name": "VisionArts Childrens Arts Studio"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269281,
+      "lat": 39.2640737,
+      "lon": -84.2673878,
+      "tags": {
+        "amenity": "prep_school",
+        "brand": "Kumon",
+        "brand:wikidata": "Q142054",
+        "name": "Kumon",
+        "training": "math"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269283,
+      "lat": 39.2638992,
+      "lon": -84.2675944,
+      "tags": {
+        "amenity": "social_facility",
+        "name": "LIFE Loveland Food Pantry",
+        "social_facility": "food_bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269586,
+      "lat": 39.2629766,
+      "lon": -84.2688009,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "amenity": "dentist",
+        "healthcare": "dentist",
+        "name": "Daniel J. Vogt, D.D.S.",
+        "opening_hours:signed": "no",
+        "phone": "+1-513-683-6009"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269587,
+      "lat": 39.2629450,
+      "lon": -84.2688471,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "beauty": "nails",
+        "name": "Nails 4 U",
+        "opening_hours": "Mo-Fr 10:00-19:30; Sa 10:00-18:30; Su 12:00-17:30",
+        "shop": "beauty"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269591,
+      "lat": 39.2628073,
+      "lon": -84.2697897,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "910",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "alt_name": "Brumfield & Weisbrot",
+        "amenity": "dentist",
+        "healthcare": "dentist",
+        "name": "Family Dentistry of Loveland",
+        "opening_hours:signed": "no",
+        "website": "http://www.dentistinloveland.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269592,
+      "lat": 39.2629266,
+      "lon": -84.2696118,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "910",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "name": "Shear Luck Salon",
+        "opening_hours": "Tu-Th 10:00-19:00; Fr 10:00-17:00; Sa 09:00-15:00",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269593,
+      "lat": 39.2627174,
+      "lon": -84.2693503,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "910",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "name": "Loveland Laundromat",
+        "opening_hours": "Mo-Su 07:00-21:00",
+        "self_service": "yes",
+        "shop": "laundry"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269594,
+      "lat": 39.2628363,
+      "lon": -84.2694893,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "910",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "craft": "cleaning",
+        "name": "Simply Organized Cleaning Services",
+        "website": "http://www.getsoclean.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269599,
+      "lat": 39.2625401,
+      "lon": -84.2701946,
+      "tags": {
+        "name": "Howard’s Kitchen Studio",
+        "shop": "kitchen",
+        "website": "https://www.howardskitchenstudio.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269600,
+      "lat": 39.2624248,
+      "lon": -84.2700270,
+      "tags": {
+        "name": "Window Accents",
+        "shop": "window_blind",
+        "website": "https://windowaccentsinc.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269601,
+      "lat": 39.2621201,
+      "lon": -84.2706512,
+      "tags": {
+        "name": "Bath Inspirations",
+        "shop": "bathroom_furnishing",
+        "website": "https://bathinspirations.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269606,
+      "lat": 39.2622532,
+      "lon": -84.2717264,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "700",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "addr:unit": "A2",
+        "brand": "Boost Mobile",
+        "brand:wikidata": "Q4943790",
+        "name": "Boost Mobile",
+        "shop": "mobile_phone"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269607,
+      "lat": 39.2622076,
+      "lon": -84.2717800,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "700",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "addr:unit": "A1",
+        "amenity": "fast_food",
+        "cuisine": "chicken",
+        "drive_through": "yes",
+        "name": "Tender Towne",
+        "website": "https://tendertowne.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269615,
+      "lat": 39.2659092,
+      "lon": -84.2678153,
+      "tags": {
+        "beauty": "nails",
+        "name": "Lovely Nails",
+        "shop": "beauty"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269618,
+      "lat": 39.2659777,
+      "lon": -84.2677741,
+      "tags": {
+        "name": "Curt’s Barber Shop",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269619,
+      "lat": 39.2660203,
+      "lon": -84.2677472,
+      "tags": {
+        "name": "Loveland Hair Designers",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269621,
+      "lat": 39.2660071,
+      "lon": -84.2659725,
+      "tags": {
+        "name": "Healthy Massage",
+        "opening_hours:signed": "no",
+        "shop": "massage"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269622,
+      "lat": 39.2660785,
+      "lon": -84.2659209,
+      "tags": {
+        "name": "Irresistible Additions",
+        "shop": "second_hand",
+        "website": "https://www.irresistibleadditions.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269624,
+      "lat": 39.2661946,
+      "lon": -84.2658857,
+      "tags": {
+        "brand": "RE/MAX",
+        "brand:wikidata": "Q965845",
+        "name": "RE/MAX",
+        "office": "estate_agent"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269633,
+      "lat": 39.2659734,
+      "lon": -84.2660252,
+      "tags": {
+        "name": "Moon Light Tattoos",
+        "opening_hours": "We-Su 12:00-21:00",
+        "shop": "tattoo"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269679,
+      "lat": 39.2694648,
+      "lon": -84.2659031,
+      "tags": {
+        "amenity": "arts_centre",
+        "level": "0",
+        "name": "For the Love of Art"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269680,
+      "lat": 39.2691432,
+      "lon": -84.2625954,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "420",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "West Loveland Avenue",
+        "name": "Clemans Nelson & Associates",
+        "office": "consulting",
+        "website": "https://www.clemansnelson.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269696,
+      "lat": 39.2691370,
+      "lon": -84.2624854,
+      "tags": {
+        "brand": "Nationwide",
+        "brand:wikidata": "Q6979886",
+        "name": "Nationwide",
+        "office": "insurance"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269697,
+      "lat": 39.2690736,
+      "lon": -84.2625686,
+      "tags": {
+        "name": "CancerFree KIDS",
+        "office": "charity",
+        "website": "https://cancerfreekids.org/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269703,
+      "lat": 39.2687145,
+      "lon": -84.2630634,
+      "tags": {
+        "name": "Infinity Wealth Counsel",
+        "office": "financial",
+        "phone": "+1-513-563-3500",
+        "website": "https://www.infinitywealthcounsel.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269704,
+      "lat": 39.2687130,
+      "lon": -84.2630179,
+      "tags": {
+        "craft": "roofer",
+        "name": "The Garland Company"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6385269706,
+      "lat": 39.2686717,
+      "lon": -84.2630221,
+      "tags": {
+        "level": "0",
+        "name": "Adoption STAR",
+        "office": "adoption_agency",
+        "phone": "+1-513-631-3900",
+        "website": "https://adoptionstar.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6387166389,
+      "lat": 39.2556370,
+      "lon": -84.2820557,
+      "tags": {
+        "board_type": "welcome_sign",
+        "direction": "-90",
+        "information": "board",
+        "name": "Welcome to Loveland",
+        "strapline": "Sweetheart of Ohio",
+        "tourism": "information"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6387166390,
+      "lat": 39.2558281,
+      "lon": -84.2821148,
+      "tags": {
+        "board_type": "welcome_sign",
+        "direction": "-110",
+        "information": "board",
+        "name": "Welcome to Loveland",
+        "strapline": "Sweetheart of Ohio",
+        "tourism": "information"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6387166406,
+      "lat": 39.2553410,
+      "lon": -84.2840320,
+      "tags": {
+        "amenity": "animal_breeding",
+        "name": "Pon’s Top Dog Grooming"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6387166407,
+      "lat": 39.2553665,
+      "lon": -84.2846638,
+      "tags": {
+        "alt_name": "Just Taxes",
+        "name": "Just Taxe$",
+        "office": "tax_advisor",
+        "old_name": "Accounting Plus",
+        "website": "https://jtaxes.net/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6485467053,
+      "lat": 39.2680932,
+      "lon": -84.2593927,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "West Loveland Avenue",
+        "level": "0",
+        "name": "Lemons and Limes Boutique",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6485467061,
+      "lat": 39.2674017,
+      "lon": -84.2576467,
+      "tags": {
+        "level": "0",
+        "name": "Vertical Drop Ski & Board",
+        "shop": "sports",
+        "sport": "skiing;snowboarding",
+        "website": "https://www.verticaldropskiandsnowboard.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6485467488,
+      "lat": 39.2674672,
+      "lon": -84.2575113,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "thai;sushi",
+        "disused:website": "http://www.bellasloveland.com/",
+        "level": "0",
+        "name": "Teak Sushi & Thai",
+        "old_name": "Bella’s",
+        "opening_hours": "We,Th 17:00-20:30; Fr,Sa 17:00-21:00; Su 17:00-20:00",
+        "outdoor_seating": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6485467496,
+      "lat": 39.2692914,
+      "lon": -84.2580740,
+      "tags": {
+        "information": "office",
+        "name": "Little Miami River Scenic Trail Center",
+        "operator": "Little Miami Conservancy",
+        "tourism": "information"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6485467497,
+      "lat": 39.2692544,
+      "lon": -84.2580884,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "209",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Railroad Avenue",
+        "name": "Little Miami Conservancy",
+        "office": "ngo",
+        "short_name": "LMC",
+        "website": "https://www.littlemiami.org/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6486935409,
+      "lat": 39.2694845,
+      "lon": -84.2661659,
+      "tags": {
+        "level": "0",
+        "name": "Legacies Realty",
+        "office": "estate_agent"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6486935412,
+      "lat": 39.2687694,
+      "lon": -84.2655854,
+      "tags": {
+        "amenity": "arts_centre",
+        "fixme": "Please confirm exact dates for \"spring,summer\"",
+        "name": "The Quilter’s Studio of Loveland",
+        "opening_hours": "Mo-We 10:00-17:00; Th 10:00-18:00; Fr-Sa 10:00-17:00; Mar-May,Jun-Aug: Th 10:00-20:00",
+        "phone": "+1-513-683-3666",
+        "website": "https://www.quiltersstudioofloveland.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6486935413,
+      "lat": 39.2687631,
+      "lon": -84.2654446,
+      "tags": {
+        "craft": "quilter",
+        "name": "The QSL Workshop",
+        "opening_hours": "Mo-Sa 10:00-17:00",
+        "phone": "+1-513-683-1666",
+        "shop": "tailor",
+        "trade": "quilting",
+        "website": "https://www.quiltersstudioofloveland.com/workshop.htm"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6489470137,
+      "lat": 39.2686122,
+      "lon": -84.2624037,
+      "tags": {
+        "alt_name": "Eagle Custom Homes and Remodeling",
+        "craft": "construction",
+        "name": "Eagle Custom Homes & Remodeling",
+        "office": "construction_company",
+        "website": "https://eaglecustomhomes.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6489470138,
+      "lat": 39.2685499,
+      "lon": -84.2623983,
+      "tags": {
+        "amenity": "doctors",
+        "brand": "TriHealth",
+        "brand:wikidata": "Q7839812",
+        "healthcare": "doctor",
+        "name": "Loveland Family Medicine",
+        "operator": "TriHealth",
+        "operator:wikidata": "Q7839812",
+        "website": "https://www.trihealth.com/hospitals-and-practices/loveland-family-medicine"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6489470141,
+      "lat": 39.2688182,
+      "lon": -84.2647390,
+      "tags": {
+        "name": "Frizzy Melon Salon",
+        "shop": "beauty"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6501814819,
+      "lat": 39.2537053,
+      "lon": -84.2936387,
+      "tags": {
+        "brand": "Infinite Self-Storage",
+        "name": "Infinite Self-Storage",
+        "shop": "storage_rental",
+        "website": "https://storagelovelandohio.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6595374591,
+      "lat": 39.2294891,
+      "lon": -84.2586086,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "784",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland-Miamiville Road",
+        "addr:unit": "800",
+        "amenity": "fast_food",
+        "brand": "Subway",
+        "brand:wikidata": "Q244457",
+        "breakfast": "yes",
+        "cuisine": "sandwich",
+        "name": "Subway",
+        "opening_hours": "09:00-21:00",
+        "phone": "+1 513-683-7600",
+        "takeaway": "yes",
+        "website": "https://restaurants.subway.com/united-states/oh/loveland/784-loveland-miamiville-rd"
+      }
+    },
     {
       "type": "node",
       "id": 6595374597,
@@ -82,6 +1368,607 @@
     },
     {
       "type": "node",
+      "id": 6595374630,
+      "lat": 39.2269961,
+      "lon": -84.2548463,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "732",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Middleton Way",
+        "addr:unit": "106",
+        "amenity": "cafe",
+        "brand": "Biggby Coffee",
+        "brand:wikidata": "Q4906876",
+        "cuisine": "coffee_shop",
+        "level": "0",
+        "name": "Biggby Coffee",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6595374635,
+      "lat": 39.2269218,
+      "lon": -84.2547713,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "732",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Middleton Way",
+        "addr:unit": "105",
+        "amenity": "restaurant",
+        "cuisine": "pizza",
+        "level": "0",
+        "name": "Mio's"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6789434469,
+      "lat": 39.2598408,
+      "lon": -84.2474694,
+      "tags": {
+        "amenity": "recycling",
+        "brand": "Saint Vincent de Paul",
+        "brand:wikidata": "Q66581837",
+        "name": "Saint Vincent de Paul",
+        "recycling:clothes": "yes",
+        "recycling:shoes": "yes",
+        "recycling_type": "container",
+        "short_name": "SVdP"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6872441102,
+      "lat": 39.2672400,
+      "lon": -84.2572604,
+      "tags": {
+        "level": "0",
+        "name": "Rosé Boutique & Wine Bar",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6990795394,
+      "lat": 39.2682475,
+      "lon": -84.2590359,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "212",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "West Loveland Avenue",
+        "amenity": "bar",
+        "cuisine": "southern",
+        "disused:shop": "pawnbroker",
+        "level": "0;1;2",
+        "name": "Bishop’s Quarter",
+        "name:etymology": "Nathaniel W. Bishop",
+        "name:etymology:wikidata": "Q113583986",
+        "note": "3 floors, 3 bars"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7187160879,
+      "lat": 39.2719632,
+      "lon": -84.2639640,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "243",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Wall Street",
+        "name": "Loveland Magazine",
+        "office": "newspaper",
+        "website": "https://www.lovelandmagazine.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7229009323,
+      "lat": 39.2612219,
+      "lon": -84.2867207,
+      "tags": {
+        "board_type": "welcome_sign",
+        "direction": "135",
+        "information": "board",
+        "is_in:neighbourhood": "Pheasant Hills",
+        "name": "Bird Dog Court",
+        "tourism": "information"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7229009326,
+      "lat": 39.2625770,
+      "lon": -84.2863253,
+      "tags": {
+        "board_type": "welcome_sign",
+        "direction": "45",
+        "information": "board",
+        "name": "Pheasant Hills",
+        "tourism": "information"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8805791996,
+      "lat": 39.2668808,
+      "lon": -84.2666410,
+      "tags": {
+        "brand": "Dunkin'",
+        "brand:wikidata": "Q847743",
+        "contact:website": "https://locations.dunkindonuts.com/en/oh/loveland/226-loveland-madeira-rd/349798",
+        "name": "Dunkin'",
+        "not:brand": "BP Shop",
+        "not:brand:wikidata": "Q152057",
+        "not:name": "BP Shop",
+        "opening_hours": "Mo-Su 05:30-23:00",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8805791997,
+      "lat": 39.2667984,
+      "lon": -84.2666546,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "226",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "alt_name": "Dunkin' Donuts",
+        "amenity": "fast_food",
+        "branch": "Loveland",
+        "brand": "Dunkin'",
+        "brand:wikidata": "Q847743",
+        "cuisine": "donut;coffee_shop",
+        "drive_through": "yes",
+        "name": "Dunkin'",
+        "opening_hours": "Mo-Th 06:00-19:00; Fr,Sa 06:00-20:00; Su 07:00-18:00",
+        "phone": "+1 513-583-5864",
+        "ref": "349798",
+        "takeaway": "yes",
+        "website": "https://locations.dunkindonuts.com/en/oh/loveland/226-loveland-madeira-rd/349798"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8807526120,
+      "lat": 39.2682885,
+      "lon": -84.2619338,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "112",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "South Riverside Drive",
+        "artist": "William Schickel",
+        "artist:wikidata": "Q107117638",
+        "artist_name": "William Schickel",
+        "name": "William Schickel Gallery",
+        "name:etymology": "William Schickel",
+        "name:etymology:wikidata": "Q107117638",
+        "opening_hours": "\"by appointment\"",
+        "tourism": "gallery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8810857605,
+      "lat": 39.2661825,
+      "lon": -84.2589887,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "131",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "East Broadway Street",
+        "name": "Loveland Hardware",
+        "old_name": "Loveland Hotel",
+        "opening_hours": "Mo-Fr 08:00-17:00; Sa 08:00-15:00",
+        "shop": "doityourself"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8810857606,
+      "lat": 39.2661591,
+      "lon": -84.2587748,
+      "tags": {
+        "amenity": "cafe",
+        "internet_access": "yes",
+        "internet_access:fee": "no",
+        "name": "Mile 42 Coffee",
+        "opening_hours": "Mo-Fr 06:30-15:00,07:00-15:00",
+        "outdoor_seating": "yes",
+        "wheelchair": "limited"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8819211111,
+      "lat": 39.2659476,
+      "lon": -84.2588640,
+      "tags": {
+        "name": "Eads Fencing Company",
+        "shop": "hardware"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8819211233,
+      "lat": 39.2676112,
+      "lon": -84.2600032,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "italian",
+        "name": "Rodi Italian"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9362914781,
+      "lat": 39.2540915,
+      "lon": -84.2824252,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "10084",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "East Kemper Road",
+        "alt_name": "Mister Demo",
+        "craft": "demolition",
+        "name": "Mr. Demo",
+        "website": "https://mrdemo.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9362914782,
+      "lat": 39.2543646,
+      "lon": -84.2814582,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "10090",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "East Kemper Road",
+        "description": "Sells dumpsters",
+        "name": "Driveway Dumpsters",
+        "shop": "trade",
+        "trade": "waste_disposal",
+        "website": "https://ddumpsters.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9362914783,
+      "lat": 39.2529572,
+      "lon": -84.2828869,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "10038",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "East Kemper Road",
+        "craft": "carpenter",
+        "name": "Decks Unlimited",
+        "phone": "+1-513-683-8406",
+        "website": "https://www.decksunlimitedofcin.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9362914784,
+      "lat": 39.2528716,
+      "lon": -84.2829554,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "10038",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "East Kemper Road",
+        "craft": "designer",
+        "name": "Indigo Design Group",
+        "phone": "+1-513-382-3985"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9448835180,
+      "lat": 39.2679330,
+      "lon": -84.2563418,
+      "tags": {
+        "alt_website": "http://thescreenshoppe.com/",
+        "name": "The Screen Shoppe",
+        "phone": "+1-513-774-8090",
+        "shop": "doors",
+        "website": "https://www.screenshoppecincinnatioh.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9536026914,
+      "lat": 39.2288390,
+      "lon": -84.2768502,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "550",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Wards Corner Road",
+        "addr:unit": "201",
+        "level": "1",
+        "name": "Sabo Design Associates",
+        "office": "architect",
+        "phone": "+1-513-683-1236",
+        "website": "https://www.sabodesignassociatesoh.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9956386625,
+      "lat": 39.2668143,
+      "lon": -84.2569137,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "111",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "South 2nd Street",
+        "amenity": "theatre",
+        "check_date": "2025-09-06",
+        "name": "Loveland Stage Company",
+        "name:etymology": "Loveland",
+        "name:etymology:wikidata": "Q843993",
+        "short_name": "LSC",
+        "website": "http://lovelandstagecompany.org/",
+        "wikidata": "Q113531796"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9959005238,
+      "lat": 39.2683186,
+      "lon": -84.2570101,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "20",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Grear Militzer Place",
+        "amenity": "restaurant",
+        "cuisine": "pizza",
+        "name": "The Works",
+        "old_name": "Loveland Public Works Building",
+        "opening_hours": "Mo-Sa 11:00-22:00; Su 11:00-21:00",
+        "outdoor_seating": "yes",
+        "phone": "+1-513-697-8408",
+        "smoking": "no",
+        "website": "https://www.theworkspizza.com/",
+        "wikidata": "Q113542570"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9968880506,
+      "lat": 39.2638820,
+      "lon": -84.2849656,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "757",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "South Lebanon Road",
+        "alt_name": "Loveland Board of Education;Loveland City School District Board of Education",
+        "name": "Loveland Board of Education Administrative Offices",
+        "office": "educational_institution",
+        "operator": "Loveland City School District",
+        "operator:type": "public",
+        "operator:wikidata": "Q6692161",
+        "website": "https://www.lovelandschools.org/",
+        "wikidata": "Q113575067"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10015290717,
+      "lat": 39.2677821,
+      "lon": -84.2595528,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "113",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Karl Brown Way",
+        "level": "0",
+        "name": "Bond Furniture",
+        "opening_hours": "Tu-Th 10:00-18:00; Fr,Sa 10:00-17:00",
+        "shop": "furniture",
+        "website": "https://www.bondfurniture.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10015290718,
+      "lat": 39.2678788,
+      "lon": -84.2596985,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "113",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Karl Brown Way",
+        "level": "1",
+        "name": "Little Miami River Chamber Alliance",
+        "office": "association",
+        "short_name": "LMRCA",
+        "website": "https://lmrchamberalliance.org/",
+        "wikidata": "Q113904669"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10019647754,
+      "lat": 39.2691344,
+      "lon": -84.2635568,
+      "tags": {
+        "addr:housenumber": "442",
+        "addr:street": "West Loveland Avenue",
+        "alt_name": "eXp Reality;Designed2Sell",
+        "brand": "Comey & Shepherd",
+        "name": "Gina-Dubell Smith",
+        "office": "estate_agent",
+        "website": "http://designed2sell.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10019655345,
+      "lat": 39.2665146,
+      "lon": -84.2571980,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "123",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "South 2nd Street",
+        "check_date": "2025-09-06",
+        "name": "John Hill Construction",
+        "office": "construction_company"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10038284379,
+      "lat": 39.2297755,
+      "lon": -84.2543094,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "6388",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Branch Hill–Guinea Pike",
+        "amenity": "bank",
+        "atm": "yes",
+        "branch": "Branch Hill Guinea Pike Kroger",
+        "brand": "U.S. Bank",
+        "brand:wikidata": "Q739084",
+        "name": "U.S. Bank",
+        "ref": "3196"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10038318664,
+      "lat": 39.2623016,
+      "lon": -84.2716695,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "700",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland Madeira Road",
+        "addr:unit": "A3",
+        "amenity": "bank",
+        "brand": "Bank of America",
+        "brand:wikidata": "Q487907",
+        "name": "Bank of America",
+        "website": "https://locators.bankofamerica.com/oh/loveland/sales-office-atm-loveland-110632.html"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11038168575,
+      "lat": 39.2658739,
+      "lon": -84.2621498,
+      "tags": {
+        "craft": "plumber",
+        "name": "Patterson Plumbing Inc."
+      }
+    },
+    {
+      "type": "node",
+      "id": 11259386699,
+      "lat": 39.2656735,
+      "lon": -84.2678066,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:housenumber": "400",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland–Madeira Road",
+        "name": "Star Wireless and Smoke Shop",
+        "opening_hours": "Mo-Sa 10:00-22:00; Su 12:00-20:00",
+        "payment:american_express": "yes",
+        "payment:discover_card": "yes",
+        "payment:mastercard": "yes",
+        "payment:visa": "yes",
+        "phone": "513-345-0354",
+        "shop": "mobile_phone",
+        "website": "https://starwirelessandsmokeshopoh.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12219609353,
+      "lat": 39.2678638,
+      "lon": -84.2595097,
+      "tags": {
+        "name": "Bike Trail Books",
+        "shop": "books"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12839152056,
+      "lat": 39.2292596,
+      "lon": -84.2583785,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "784",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland-Miamiville Road",
+        "addr:unit": "400",
+        "amenity": "restaurant",
+        "cuisine": "american",
+        "name": "Traci’s Sports Lounge & Grill",
+        "website": "http://www.tracissports.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12839187027,
+      "lat": 39.2290904,
+      "lon": -84.2586447,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "784",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland-Miamiville Road",
+        "addr:unit": "100",
+        "amenity": "cafe",
+        "name": "Exprezzo"
+      }
+    },
+    {
+      "type": "node",
       "id": 12839187084,
       "lat": 39.2302178,
       "lon": -84.2582275,
@@ -96,6 +1983,99 @@
         "amenity": "restaurant",
         "cuisine": "greek",
         "name": "Mezedes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12839187108,
+      "lat": 39.2295343,
+      "lon": -84.2586566,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "784",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland-Miamiville Road",
+        "addr:unit": "900",
+        "amenity": "restaurant",
+        "cuisine": "mexican",
+        "name": "El Picante"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12839187126,
+      "lat": 39.2291725,
+      "lon": -84.2585156,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "784",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland-Miamiville Road",
+        "addr:unit": "300",
+        "name": "Robertson Jewlery",
+        "shop": "jewelry"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12839187146,
+      "lat": 39.2267717,
+      "lon": -84.2545688,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "732",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Middleton Way",
+        "addr:unit": "103",
+        "amenity": "doctors",
+        "healthcare": "doctor",
+        "healthcare:speciality": "dermatology",
+        "name": "Embody Skin Care"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12839187240,
+      "lat": 39.2291299,
+      "lon": -84.2585826,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "784",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland-Miamiville Road",
+        "addr:unit": "200",
+        "beauty": "nails",
+        "name": "Purlux Nail Salon",
+        "shop": "beauty"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12839187361,
+      "lat": 39.2293113,
+      "lon": -84.2584308,
+      "tags": {
+        "addr:city": "Loveland",
+        "addr:country": "US",
+        "addr:housenumber": "784",
+        "addr:postcode": "45140",
+        "addr:state": "OH",
+        "addr:street": "Loveland-Miamiville Road",
+        "addr:unit": "500",
+        "amenity": "restaurant",
+        "cuisine": "chinese",
+        "name": "Timmy’s Wok",
+        "name:en": "Timmy’s Wok",
+        "name:zh": "張家興",
+        "website": "http://timmywok.com/"
       }
     }
   ]
