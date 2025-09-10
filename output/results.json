@@ -1,7 +1,92 @@
 [
   {
-    "business_name": "Performance Title",
-    "url": "https://theperformancetitle.com/",
-    "description": "Auto-discovered from scan"
+    "business_name": "Loveland Branch Library",
+    "url": "https://chpl.org/locations/LV/",
+    "description": "Jobs page found on Loveland Branch Library"
+  },
+  {
+    "business_name": "Ramey Insurance Agency",
+    "url": "https://www.progressive.com/agent/local-agent/ohio/loveland/ramey-insurance-agency-45140/",
+    "description": "Jobs page found on Ramey Insurance Agency"
+  },
+  {
+    "business_name": "Dollar General",
+    "url": "https://www.dollargeneral.com/store-directory/oh/loveland/4544",
+    "description": "Jobs page found on Dollar General"
+  },
+  {
+    "business_name": "Loveland Music Academy",
+    "url": "https://www.lovelandmusicacademy.com/",
+    "description": "Jobs page found on Loveland Music Academy"
+  },
+  {
+    "business_name": "Choice One Engineering",
+    "url": "https://choiceoneengineering.com/",
+    "description": "Jobs page found on Choice One Engineering"
+  },
+  {
+    "business_name": "Graeter's",
+    "url": "https://www.graeters.com/stores/retail-stores/loveland/loveland-station",
+    "description": "Jobs page found on Graeter's"
+  },
+  {
+    "business_name": "Loveland Farmers’ Market",
+    "url": "http://www.lovelandfm.com/",
+    "description": "Jobs page found on Loveland Farmers’ Market"
+  },
+  {
+    "business_name": "Nikki Shah Insurance",
+    "url": "https://www.nikkishah.com/",
+    "description": "Jobs page found on Nikki Shah Insurance"
+  },
+  {
+    "business_name": "Tender Towne",
+    "url": "https://tendertowne.com/",
+    "description": "Jobs page found on Tender Towne"
+  },
+  {
+    "business_name": "CancerFree KIDS",
+    "url": "https://cancerfreekids.org/",
+    "description": "Jobs page found on CancerFree KIDS"
+  },
+  {
+    "business_name": "Infinity Wealth Counsel",
+    "url": "https://www.infinitywealthcounsel.com/",
+    "description": "Jobs page found on Infinity Wealth Counsel"
+  },
+  {
+    "business_name": "Vertical Drop Ski \u0026 Board",
+    "url": "https://www.verticaldropskiandsnowboard.com/",
+    "description": "Jobs page found on Vertical Drop Ski \u0026 Board"
+  },
+  {
+    "business_name": "Loveland Family Medicine",
+    "url": "https://www.trihealth.com/hospitals-and-practices/loveland-family-medicine",
+    "description": "Jobs page found on Loveland Family Medicine"
+  },
+  {
+    "business_name": "Subway",
+    "url": "https://restaurants.subway.com/united-states/oh/loveland/784-loveland-miamiville-rd",
+    "description": "Jobs page found on Subway"
+  },
+  {
+    "business_name": "Dunkin'",
+    "url": "https://careers.dunkindonuts.com/us/en",
+    "description": "Jobs page found on Dunkin'"
+  },
+  {
+    "business_name": "Dunkin'",
+    "url": "https://careers.dunkindonuts.com/us/en",
+    "description": "Jobs page found on Dunkin'"
+  },
+  {
+    "business_name": "The Works",
+    "url": "https://www.theworkspizza.com/",
+    "description": "Jobs page found on The Works"
+  },
+  {
+    "business_name": "Bank of America",
+    "url": "https://locators.bankofamerica.com/oh/loveland/sales-office-atm-loveland-110632.html",
+    "description": "Jobs page found on Bank of America"
   }
 ]
