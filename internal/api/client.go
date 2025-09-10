@@ -10,9 +10,11 @@ import (
 	//"cliscraper/internal/backend/geo"
 	"cliscraper/internal/utils"
 	"net/http"
+	"net/url"
 	"time"
 	"fmt"
 	"encoding/json"
+
 )
 
 type Client struct {
@@ -23,7 +25,7 @@ type Client struct {
 type Response struct {
 	Status  string      `json:"status"`
 	Message string      `json:"message,omitempty"`
-	Data    interface{} `json:"data,omitempty"`
+	Data    json.RawMessage `json:"data,omitempty"`
 }
 
 func NewClient(baseURL string) *Client {
