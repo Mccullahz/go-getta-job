@@ -74,4 +74,8 @@ func InitialModel(svc Service) Model {
 	}
 }
 
+// just a getter for the service interface so other packages can use it
+func (m Model) Service() Service {
+    return m.service
+}
 

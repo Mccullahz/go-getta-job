@@ -5,12 +5,13 @@ import (
 	"cliscraper/internal/ui/model"
 	"cliscraper/internal/ui/messages"
 	"cliscraper/internal/ui/components"
-	"cliscraper/internal/backend/geo"
-	"cliscraper/internal/backend/web"
-	"cliscraper/internal/utils"
+
+	//"cliscraper/internal/backend/geo"
+	//"cliscraper/internal/backend/web"
+	//"cliscraper/internal/utils"
 	"fmt"
-	"strconv"
-	"strings"
+	//"strconv"
+	//"strings"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -44,54 +45,16 @@ func ViewSearching(m model.Model) string {
 }
 
 // return a tea.Cmd that will run the search asynchronously
-func StartSearchCmd(zip, radius string, title string) tea.Cmd {
+func StartSearchCmd(m model.Model, zip, radius, title string) tea.Cmd {
 	return func() tea.Msg {
-		r, err := strconv.Atoi(radius)
+		results, err := m.Service().Search(zip, radius, title)
 		if err != nil {
-			return DoneMsg{Err: fmt.Errorf("invalid radius: %w", err)}
-		}
-
-		lat, lon, err := geo.GetCoordinatesFromZip(zip)
-		if err != nil {
-			return DoneMsg{Err: fmt.Errorf("failed to get coordinates for ZIP %s: %w", zip, err)}
-		}
-
-		businesses, err := geo.LocateBusinesses(lat, lon, r)
-		if err != nil {
-			return DoneMsg{Err: err}
-		}
-
-		titleKeywords := []string{}
-		// only add title if not empty or whitespace
-			if strings.TrimSpace(title) != "" {
-			titleKeywords = append(titleKeywords, title)
-		}
-
-		var results []utils.JobPageResult
-		for i, b := range businesses {
-			if b.URL == "" {
-				continue
-			}
-			jobURL, err := web.ScrapeWebsite(b.URL, titleKeywords)
-			if err != nil || jobURL == "" {
-				continue
-			}
-			businesses[i].URL = jobURL
-			results = append(results, utils.JobPageResult{
-				BusinessName: b.Name,
-				URL:          jobURL,
-				Description:  "Jobs page found on " + b.Name,
-			})
-		}
-
-		if err := utils.WriteResults(results, "./output"); err != nil {
-			return DoneMsg{Err: fmt.Errorf("failed to write results: %w", err)}
+			return DoneMsg{Err: fmt.Errorf("search failed: %w", err)}
 		}
 
 		return DoneMsg{
-			Businesses: businesses,
-			Results:    results,
-			Err:        nil,
+			Results: results,
+			// if API doesn’t send them, leave Businesses nil.
 		}
 	}
 }
