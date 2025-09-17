@@ -6,17 +6,10 @@ import (
 	"cliscraper/internal/ui/messages"
 	"cliscraper/internal/ui/components"
 
-	//"cliscraper/internal/backend/geo"
-	//"cliscraper/internal/backend/web"
-	//"cliscraper/internal/utils"
 	"fmt"
-	//"strconv"
-	//"strings"
-
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-// when the search complete, done message is sent
 type DoneMsg = messages.DoneMsg
 
 // handle incoming messages while in the searching state

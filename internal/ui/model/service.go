@@ -1,7 +1,9 @@
 // this files acts as an interface between the HTTP handlers and the backend logic.
 package model
 
-import "cliscraper/internal/utils"
+import (
+	"cliscraper/internal/utils"
+)
 
 // define the interface the TUI depends on, should minimize refactoring where the backend logic changes
 type Service interface {
