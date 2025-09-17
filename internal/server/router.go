@@ -20,8 +20,8 @@ func NewRouter() http.Handler {
 	// API routes -- should work for the things we have implemented so far 
 	r.Get("/health", HealthHandler)
 	r.Get("/search", SearchHandler)
-	r.Get("/results/{id}", ResultsHandler) // fetch results by search id
-	r.Get("/starred", StarredHandler)      // fetch all starred jobs
+	r.Get("/results", ResultsHandler)
+	r.Get("/starred", StarredHandler)
 
 	return r
 }

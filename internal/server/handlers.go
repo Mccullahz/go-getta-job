@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 
 	"cliscraper/internal/backend/geo"
@@ -110,16 +109,12 @@ func ResultsHandler(w http.ResponseWriter, r *http.Request) {
         writeJSON(w, http.StatusNotFound, Response{Status: "error", Message: "results not found"})
         return
     }
-
-    id := chi.URLParam(r, "id")
-
-    writeJSON(w, http.StatusOK, Response{
-        Status: "ok",
-        Data: map[string]interface{}{
-            "id":      id,
-            "results": results,
-        },
-    })
+	writeJSON(w, http.StatusOK, Response{
+		Status: "ok",
+		Data:   map[string]interface{}{
+		"results": results,
+		},
+	})
 }
 
 // fetch starred jobs (stub)
