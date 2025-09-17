@@ -9,7 +9,7 @@ import (
 type Service interface {
 	Health() error
 	Search(zip, radius, title string) ([]utils.JobPageResult, error)
-	Results(id string) ([]utils.JobPageResult, error)
+	Results() ([]utils.JobPageResult, error)
 	Starred() ([]utils.JobPageResult, error)
 }
 

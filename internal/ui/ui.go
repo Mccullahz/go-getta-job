@@ -10,7 +10,7 @@ import (
 	"cliscraper/internal/ui/states"
 	"cliscraper/internal/ui/components"
 	"cliscraper/internal/ui/messages"
-	"cliscraper/internal/utils"
+	//"cliscraper/internal/utils"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -54,7 +54,8 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return u, tea.Quit
 		case "f", "F":
 		    if u.CurrentState == model.StateDone && !u.ShowResults {
-		        results, err := utils.LoadLatestResults("./output")
+			// fetch results from server instead of lfs
+		        results, err := u.Service().Results()
 		        if err != nil {
 		            u.Err = "Failed to load results: " + err.Error()
 		        } else {

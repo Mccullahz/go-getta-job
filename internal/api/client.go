@@ -6,8 +6,6 @@ Moving from a monolithic server to a client-server architecture, we need to repl
 package api
 
 import (
-	//"cliscraper/internal/backend/web"
-	//"cliscraper/internal/backend/geo"
 	"cliscraper/internal/utils"
 	"net/http"
 	"net/url"
@@ -32,7 +30,7 @@ func NewClient(baseURL string) *Client {
 	return &Client{
 		BaseURL: baseURL,
 		HTTPClient: &http.Client{
-		Timeout: 360 * time.Second,
+		Timeout: 3600 * time.Second, // outrageous timeout for scraping, just dont want to deal with issues with tomeouts right now
 	},
 	}
 }
@@ -87,8 +85,8 @@ func (c *Client) Search(zip, radius, title string) ([]utils.JobPageResult, error
 	return payload.Results, nil
 }
 
-func (c *Client) Results(id string) ([]utils.JobPageResult, error) {
-	url := fmt.Sprintf("%s/results/%s", c.BaseURL, id)
+func (c *Client) Results() ([]utils.JobPageResult, error) {
+	url := fmt.Sprintf("%s/results", c.BaseURL)
 	resp, err := c.HTTPClient.Get(url)
 	if err != nil {
 		return nil, err
@@ -104,7 +102,6 @@ func (c *Client) Results(id string) ([]utils.JobPageResult, error) {
 	}
 
 	var payload struct {
-		ID      string               `json:"id"`
 		Results []utils.JobPageResult `json:"results"`
 	}
 	if err := json.Unmarshal(apiResp.Data, &payload); err != nil {
