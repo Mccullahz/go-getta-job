@@ -1,3 +1,4 @@
+// starting http server using routes from server package (/internal/server/router.go)
 package main
 
 import (
