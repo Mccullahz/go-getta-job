@@ -1,3 +1,4 @@
+// wiring handlers to routes for the api
 package server
 
 import (
@@ -16,9 +17,9 @@ func NewRouter() http.Handler {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.SetHeader("Content-Type", "application/json"))
 
-	// API routes
+	// API routes -- should work for the things we have implemented so far 
 	r.Get("/health", HealthHandler)
-	r.Post("/search", SearchHandler)
+	r.Get("/search", SearchHandler)
 	r.Get("/results/{id}", ResultsHandler) // fetch results by search id
 	r.Get("/starred", StarredHandler)      // fetch all starred jobs
 
