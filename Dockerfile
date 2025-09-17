@@ -6,6 +6,8 @@ RUN go mod download
 
 COPY . .
 
+ENV TZ America/New_York
+
 RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/server
 
 FROM alpine:3.20
