@@ -32,7 +32,7 @@ func NewClient(baseURL string) *Client {
 	return &Client{
 		BaseURL: baseURL,
 		HTTPClient: &http.Client{
-		Timeout: 10 * time.Second,
+		Timeout: 360 * time.Second,
 	},
 	}
 }
@@ -76,7 +76,7 @@ func (c *Client) Search(zip, radius, title string) ([]utils.JobPageResult, error
 	// decoding Data.results into []utils.JobPageResult
 	var payload struct {
 		Zip    string               `json:"zip"`
-		Radius string               `json:"radius"`
+		Radius int               `json:"radius"`
 		Title  string               `json:"title"`
 		Results []utils.JobPageResult `json:"results"`
 	}
