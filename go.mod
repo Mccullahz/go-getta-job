@@ -7,6 +7,7 @@ require (
 	github.com/charmbracelet/bubbletea v1.3.5
 	github.com/charmbracelet/lipgloss v1.1.0
 	github.com/go-chi/chi/v5 v5.2.3
+	github.com/google/uuid v1.6.0
 	golang.org/x/net v0.42.0
 )
 
