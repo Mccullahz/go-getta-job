@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"golang.org/x/net/html"
 )
@@ -16,9 +17,14 @@ if the root is genuinely a careers page, it will still be returned.
 if the root just mentions jobs but has a dedicated /careers or /jobs link (etc), the scraper follows links and returns the designated jobs page.
 only if nothing better is found AND there seems to be careers does it fall back to root.
 */
+
+var httpClient = &http.Client{
+	Timeout: 10 * time.Second,
+}
+
 func ScrapeWebsite(rootURL string, titles []string) (string, error) {
 	// fetch url root and checks if responds 
-	resp, err := http.Get(rootURL)
+	resp, err := httpClient.Get(rootURL)
 	if err != nil {
 		return "", fmt.Errorf("failed to fetch %s: %w", rootURL, err)
 	}
@@ -61,7 +67,7 @@ func ScrapeWebsite(rootURL string, titles []string) (string, error) {
 
 // fetch a link and applies IsJobPage
 func checkLink(link string, titles []string) (string, bool) {
-	resp, err := http.Get(link)
+	resp, err := httpClient.Get(link)
 	if err != nil {
 		return "", false
 	}

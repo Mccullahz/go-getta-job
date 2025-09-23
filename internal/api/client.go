@@ -30,7 +30,7 @@ func NewClient(baseURL string) *Client {
 	return &Client{
 		BaseURL: baseURL,
 		HTTPClient: &http.Client{
-		Timeout: 3600 * time.Second, // outrageous timeout for scraping, just dont want to deal with issues with tomeouts right now
+		Timeout: 1800 * time.Second, // outrageous timeout for scraping, just dont want to deal with issues with tomeouts right now
 	},
 	}
 }
