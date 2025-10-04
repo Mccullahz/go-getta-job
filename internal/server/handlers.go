@@ -75,7 +75,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		if res.JobPage != "" {
 			jobResults = append(jobResults, utils.JobPageResult{
-				BusinessName: res.BusinessName,
+				BusinessName: res.BusinessName, // broke this but fixing 
 				URL:          res.JobPage,
 			})
 		}
