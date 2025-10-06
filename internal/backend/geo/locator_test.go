@@ -139,7 +139,7 @@ func TestOverpassResponseStruct(t *testing.T) {
 }
 
 // Note: The actual API functions (GetCoordinatesFromZip, LocateBusinesses, FindBusinessesByZip)
-// make real HTTP requests to external APIs, so they would need to be tested with:
+// make real HTTP requests to external APIs, so they need to be tested with:
 // 1. Mock HTTP servers
 // 2. Integration tests with real APIs
 // 3. Or by refactoring to accept HTTP clients for dependency injection
