@@ -1,0 +1,12 @@
+[
+  {
+    "business_name": "Test Company 1",
+    "url": "https://example1.com/careers",
+    "description": "Software engineering positions available"
+  },
+  {
+    "business_name": "Test Company 2", 
+    "url": "https://example2.com/jobs",
+    "description": "Developer roles and opportunities"
+  }
+]

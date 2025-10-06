@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Test Company 1",
+    "url": "https://example1.com",
+    "lat": 40.7128,
+    "lon": -74.0060
+  },
+  {
+    "name": "Test Company 2", 
+    "url": "https://example2.com",
+    "lat": 40.7589,
+    "lon": -73.9851
+  },
+  {
+    "name": "Test Company 3",
+    "url": "https://example3.com",
+    "lat": 40.7505,
+    "lon": -73.9934
+  }
+]
