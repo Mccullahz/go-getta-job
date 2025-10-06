@@ -41,7 +41,8 @@ func (wp *WorkerPool) Run(jobs []Job) []Result {
 
 	var wg sync.WaitGroup
 
-	// launch workers -- SLOW: O(n^2) in worst case
+	// launch workers -- SLOW: O(n^2) in worst case, 
+	// TODO: we can optimize this by using a hashmap, but I have not approached this yet
 	for i := 0; i < wp.NumWorkers; i++ {
 		wg.Add(1)
 		workerID := i + 1 // fix closure issue by capturing loop variable
@@ -80,4 +81,3 @@ func (wp *WorkerPool) Run(jobs []Job) []Result {
 	log.Printf("Worker pool completed! Processed %d jobs, got %d results", len(jobs), len(results))
 	return results
 }
-

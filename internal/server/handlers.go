@@ -63,7 +63,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// step 3: run worker pool
-	pool := web.NewWorkerPool(10, 300) // x workers, x s timeout
+	pool := web.NewWorkerPool(100, 300) // x workers, x s timeout
 	results := pool.Run(jobs)
 
 	// step 4: collect results
@@ -130,4 +130,3 @@ func StarredHandler(w http.ResponseWriter, r *http.Request) {
 		Data:   starred,
 	})
 }
-
