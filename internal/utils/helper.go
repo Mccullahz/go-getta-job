@@ -17,7 +17,15 @@ func NormalizeURL(url string) string {
 }
 
 func IsValidZip(zip string) bool {
-    return len(zip) == 5
+    if len(zip) != 5 {
+        return false
+    }
+    for _, ch := range zip {
+        if ch < '0' || ch > '9' {
+            return false
+        }
+    }
+    return true
 }
 
 func IsValidRadius(r string) bool {
