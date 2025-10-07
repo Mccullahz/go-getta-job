@@ -2,6 +2,7 @@
 
 This document provides a comprehensive guide to testing the Go Getta Job application. Currently, this only includes unit and integration tests, but future plans include end to end tests and UI / Mobile tests.
 
+
 ## Overview
 
 The testing suite is organized into several layers:
