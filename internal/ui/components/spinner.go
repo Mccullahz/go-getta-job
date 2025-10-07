@@ -2,24 +2,35 @@
 package components
 
 import (
+	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/charmbracelet/bubbles/spinner"
 )
 
-type spin struct {
-	spinner  spinner.Model
-	quitting bool
-	err      error
+type Spin struct {
+	Spinner  spinner.Model
+	Quitting bool
+	Err      error
 }
 
-func initialSpinner() spin {
+func InitialSpinner() Spin {
 	s := spinner.New()
 	s.Spinner = spinner.Dot
 	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
-	return spin{spinner: s}
+	return Spin{Spinner: s}
 }
 
-func (m spin) Init() tea.Cmd {
-	return m.spinner.Tick
+func (m *Spin) Init() tea.Cmd {
+	return m.Spinner.Tick
 }
+
+func (m *Spin) Update(msg tea.Msg) tea.Cmd {
+	var cmd tea.Cmd
+	m.Spinner, cmd = m.Spinner.Update(msg)
+	return cmd
+}
+
+func (m *Spin) View() string {
+	return m.Spinner.View()
+}
+
