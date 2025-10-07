@@ -153,8 +153,7 @@ func TestFindBusinessesByZipIntegration(t *testing.T) {
 		t.Skip("Skipping integration test when external APIs are disabled")
 	}
 	
-	// Test with a known zip code
-	zip := "45140" // Known zip code in Ohio, not too many businesses to scrape
+	zip := "45140" // Known zip code in Ohio, not too many businesses to scrape, this is working 
 	radius := 1    // 1 mile radius (very small for testing)
 	
 	businesses, err := FindBusinessesByZip(zip, radius)
