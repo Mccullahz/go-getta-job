@@ -35,6 +35,7 @@ type Model struct {
     ShowResults  bool
     ResultsList list.Model
     Starred    []components.JobItem
+    Spinner     components.Spin
     StarredList list.Model
 
     InnerCursor int
@@ -69,6 +70,7 @@ func InitialModel(svc Service) Model {
 	service: svc,
 	CurrentState: StateHome,
 	Starred: []components.JobItem{},
+	Spinner: components.InitialSpinner(),
 	TopCursor: 0,
 	InnerCursor: 0,
 	}

@@ -19,14 +19,6 @@ var options = map[string][]string{
 	"Settings":   {"Account Settings", "Output - Export Preferences"},
 }
 
-// Styles
-var (
-	titleStyle    = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("205")).MarginBottom(2)
-	selectedStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("229")).Background(lipgloss.Color("63")).Bold(true).Padding(0, 1)
-	normalStyle   = lipgloss.NewStyle().Foreground(lipgloss.Color("246"))
-	helpStyle     = lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Italic(true)
-)
-
 func UpdateHome(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
