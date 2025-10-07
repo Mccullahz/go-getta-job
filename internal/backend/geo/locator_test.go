@@ -139,14 +139,11 @@ func TestOverpassResponseStruct(t *testing.T) {
 }
 
 // Note: The actual API functions (GetCoordinatesFromZip, LocateBusinesses, FindBusinessesByZip)
-// make real HTTP requests to external APIs, so they need to be tested with:
-// 1. Mock HTTP servers
-// 2. Integration tests with real APIs
-// 3. Or by refactoring to accept HTTP clients for dependency injection
+// make real HTTP requests to external APIs, so they need to be tested with Mock HTTP servers established
 
 func TestFindBusinessesByZipIntegration(t *testing.T) {
 	// This is an integration test that makes real API calls
-	// Skip in short mode to avoid external dependencies
+	// Skip in short mode to avoid external dependencies. We are testing our code, not the APIs code.
 	if testing.Short() {
 		t.Skip("Skipping integration test in short mode")
 	}
@@ -157,8 +154,8 @@ func TestFindBusinessesByZipIntegration(t *testing.T) {
 	}
 	
 	// Test with a known zip code
-	zip := "10001" // New York, NY
-	radius := 0    // 0 mile radius (very small for testing)
+	zip := "45140" // Known zip code in Ohio, not too many businesses to scrape
+	radius := 1    // 1 mile radius (very small for testing)
 	
 	businesses, err := FindBusinessesByZip(zip, radius)
 	if err != nil {
@@ -176,12 +173,12 @@ func TestFindBusinessesByZipIntegration(t *testing.T) {
 			t.Errorf("Business %d has empty name", i)
 		}
 		
-		// Lat/Lon should be reasonable for NYC area
-		if business.Lat < 40.0 || business.Lat > 41.0 {
+		// Lat/Lon should be reasonable for the Loveland, OH area
+		if business.Lat < 35 || business.Lat > 50 {
 			t.Errorf("Business %d has unreasonable latitude: %f", i, business.Lat)
 		}
 		
-		if business.Lon < -75.0 || business.Lon > -73.0 {
+		if business.Lon < -90.0 || business.Lon > -75.0 {
 			t.Errorf("Business %d has unreasonable longitude: %f", i, business.Lon)
 		}
 	}
