@@ -13,9 +13,13 @@ func UpdateTitle(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch msg.Type {
 		case tea.KeyEnter:
-				m.CurrentState = model.StateSearching
-				m.Err = ""
-				return m, StartSearchCmd(m, m.Zip, m.Radius, m.Title)
+			m.CurrentState = model.StateSearching
+			m.Spinner = components.InitialSpinner()
+			m.Err = ""
+			return m, tea.Batch(
+				m.Spinner.Init(),
+				StartSearchCmd(m, m.Zip, m.Radius, m.Title),
+			)
 		case tea.KeyBackspace, tea.KeyDelete:
 			if len(m.Title) > 0 {
 				m.Title = m.Title[:len(m.Title)-1]

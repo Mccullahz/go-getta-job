@@ -15,8 +15,9 @@ type DoneMsg = messages.DoneMsg
 // handle incoming messages while in the searching state
 func UpdateSearching(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 	switch msg := msg.(type) {
-	case spinner.TickMsg:
-		cmd := m.Spinner.Update(msg)
+		case spinner.TickMsg:
+			var cmd tea.Cmd
+			m.Spinner, cmd = m.Spinner.Update(msg)
 		return m, cmd
 
 	case DoneMsg:
@@ -36,7 +37,6 @@ func UpdateSearching(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 
 // render the searching view for the ui
 func ViewSearching(m model.Model) string {
-	m.Spinner.View()
 	return components.StatusStyle.Render(fmt.Sprintf(
 		"%s Searching for %s job pages near %s within radius of %s miles...\n",
 		m.Spinner.View(), m.Title, m.Zip, m.Radius,
