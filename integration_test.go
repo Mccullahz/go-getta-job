@@ -57,8 +57,8 @@ func TestFullWorkflowIntegration(t *testing.T) {
 			t.Skip("Skipping external API calls")
 		}
 
-		// Use a very small radius (0.1 miles) to minimize external API calls
-		results, err := client.Search("10001", "0", "engineer")
+		// Use a very small radius to minimize external API calls
+		results, err := client.Search("45140", "0", "engineer")
 		if err != nil {
 			t.Logf("Search failed (expected in test environment): %v", err)
 			return
@@ -197,8 +197,8 @@ func TestAPIClientIntegration(t *testing.T) {
 			"/search": map[string]interface{}{
 				"status": "ok",
 				"data": map[string]interface{}{
-					"zip":     "10001",
-					"radius":  5,
+					"zip":     "45140",
+					"radius":  3,
 					"title":   "engineer",
 					"results": testutils.MockJobResults(),
 				},

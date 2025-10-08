@@ -37,51 +37,51 @@ func TestBusinessStruct(t *testing.T) {
 
 func TestPlacesStruct(t *testing.T) {
 	place := Places{
-		PlaceName:     "New York",
-		Longitude:     "-74.0060",
-		Latitude:      "40.7128",
-		State:         "New York",
-		StateAbbr:     "NY",
+		PlaceName:     "Loveland",
+		Longitude:     "-84.2638",
+		Latitude:      "39.2689",
+		State:         "Ohio",
+		StateAbbr:     "OH",
 	}
 	
-	if place.PlaceName != "New York" {
-		t.Errorf("Expected place name 'New York', got %s", place.PlaceName)
+	if place.PlaceName != "Loveland" {
+		t.Errorf("Expected place name 'Loveland', got %s", place.PlaceName)
 	}
 	
-	if place.Longitude != "-74.0060" {
-		t.Errorf("Expected longitude '-74.0060', got %s", place.Longitude)
+	if place.Longitude != "-84.2638" {
+		t.Errorf("Expected longitude '-84.2638', got %s", place.Longitude)
 	}
 	
-	if place.Latitude != "40.7128" {
-		t.Errorf("Expected latitude '40.7128', got %s", place.Latitude)
+	if place.Latitude != "39.2689" {
+		t.Errorf("Expected latitude '39.2689', got %s", place.Latitude)
 	}
 	
-	if place.State != "New York" {
-		t.Errorf("Expected state 'New York', got %s", place.State)
+	if place.State != "Ohio" {
+		t.Errorf("Expected state 'Ohio', got %s", place.State)
 	}
 	
-	if place.StateAbbr != "NY" {
-		t.Errorf("Expected state abbreviation 'NY', got %s", place.StateAbbr)
+	if place.StateAbbr != "OH" {
+		t.Errorf("Expected state abbreviation 'OH', got %s", place.StateAbbr)
 	}
 }
 
 func TestZippoResponseStruct(t *testing.T) {
 	response := ZippoResponse{
-		PostCode:      "10001",
+		PostCode:      "45140",
 		Country:       "United States",
 		CountryAbbr:   "US",
 		Places:        []Places{
 			{
-				PlaceName: "New York",
-				Longitude: "-74.0060",
-				Latitude:  "40.7128",
-				State:     "New York",
-				StateAbbr: "NY",
+				PlaceName: "Loveland",
+				Longitude: "-84.2638",
+				Latitude:  "39.2689",
+				State:     "Ohio",
+				StateAbbr: "OH",
 			},
 		},
 	}
 	
-	if response.PostCode != "10001" {
+	if response.PostCode != "45140" {
 		t.Errorf("Expected post code '10001', got %s", response.PostCode)
 	}
 	
@@ -106,8 +106,8 @@ func TestOverpassResponseStruct(t *testing.T) {
 			Tags map[string]string `json:"tags"`
 		}{
 			{
-				Lat:  40.7128,
-				Lon:  -74.0060,
+				Lat:  39.2689,
+				Lon:  -84.2638,
 				Tags: map[string]string{
 					"name":    "Test Business",
 					"website": "https://example.com",
@@ -121,12 +121,12 @@ func TestOverpassResponseStruct(t *testing.T) {
 	}
 	
 	element := response.Elements[0]
-	if element.Lat != 40.7128 {
-		t.Errorf("Expected lat 40.7128, got %f", element.Lat)
+	if element.Lat != 39.2689 {
+		t.Errorf("Expected lat 39.2689, got %f", element.Lat)
 	}
 	
-	if element.Lon != -74.0060 {
-		t.Errorf("Expected lon -74.0060, got %f", element.Lon)
+	if element.Lon != -84.2638 {
+		t.Errorf("Expected lon -84.2638, got %f", element.Lon)
 	}
 	
 	if element.Tags["name"] != "Test Business" {
@@ -155,7 +155,7 @@ func TestFindBusinessesByZipIntegration(t *testing.T) {
 	
 	// Test with a known zip code
 	zip := "45140" // Known zip code in Ohio, not too many businesses to scrape
-	radius := 1    // 1 mile radius (very small for testing)
+	radius := 2    // 1 mile radius (very small for testing)
 	
 	businesses, err := FindBusinessesByZip(zip, radius)
 	if err != nil {
