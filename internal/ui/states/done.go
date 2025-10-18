@@ -18,10 +18,6 @@ func ViewDone(m model.Model) string {
 		m.ResultsList = components.NewResultsList(m.Results, m.Width, m.Height -2)
 	}
 
-	if m.Err != "" {
-		b.WriteString("\nError: " + m.Err + "\n")
-	}
-
 	return b.String()
 }
 
