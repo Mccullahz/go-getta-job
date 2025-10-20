@@ -4,9 +4,9 @@
 
 # Features
 - Sleek terminal interface using [Bubbletea()] + [Lipgloss()]
-- Scraping + Geo via ZIP built with Go's Standard Libraries
+- Scraping + Geo locational via ZIP built with Go's Standard Libraries + [Overpass API]()]
 
 # Usage
-- I'm greedy and keeping this as a private repo for now :)
+- This project is still in early development and not yet ready for public use, however when this repository opens up, you are free to clone and build the project as you see fit.
 
 
