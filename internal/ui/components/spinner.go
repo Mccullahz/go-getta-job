@@ -20,14 +20,14 @@ func InitialSpinner() Spin {
 	return Spin{Spinner: s}
 }
 
-func (m *Spin) Init() tea.Cmd {
+func (m Spin) Init() tea.Cmd {
 	return m.Spinner.Tick
 }
 
-func (m *Spin) Update(msg tea.Msg) tea.Cmd {
+func (m Spin) Update(msg tea.Msg) (Spin, tea.Cmd) {
 	var cmd tea.Cmd
 	m.Spinner, cmd = m.Spinner.Update(msg)
-	return cmd
+	return m, cmd
 }
 
 func (m *Spin) View() string {

@@ -9,7 +9,6 @@ import (
 	"io"
 	"strconv"
 	"strings"
-	"cliscraper/internal/utils"
 )
 
 type Business struct {
@@ -79,7 +78,6 @@ func GetCoordinatesFromZip(zip string) (float64, float64, error) {
 
 // overpass api to locate businesses around x radius of a lat/lgn point, send a query to the overpass api, parse the response, and return a list of businesses to geo-results.json
 // geoData should be the lat lon from zippo + radius from user input. OverPass is going to read this distance in meters, so we need to convert to miles. -- 1 mile = 1609.34 meters, so we can multiply the radius by 1609.34 to get the distance in meters.
-// expected error to be handled: Error: encoding error: Your input contains only whitespace." which just means "no query was given")
 func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) {
 
 	rawQuery := fmt.Sprintf(`
@@ -90,8 +88,14 @@ func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) 
   node["office"]["name"](around:%d,%f,%f);
   node["craft"]["name"](around:%d,%f,%f);
   node["tourism"]["name"](around:%d,%f,%f);
+  node["leisure"]["name"](around:%d,%f,%f);
+  node["building"]["office"]["name"](around:%d,%f,%f);
+  node["building"]["commercial"]["name"](around:%d,%f,%f);
 );
 out;`,
+		radius*1609, lat, lon,
+		radius*1609, lat, lon,
+		radius*1609, lat, lon,
 		radius*1609, lat, lon,
 		radius*1609, lat, lon,
 		radius*1609, lat, lon,
@@ -119,16 +123,14 @@ out;`,
 		return nil, fmt.Errorf("reading response failed: %w", err)
 	}
 
-	if err := utils.WriteGeoResults(body, "output"); err != nil {
-		return nil, fmt.Errorf("writing geo results failed: %w", err)
-	}
+	// NOTE: geo results are now stored in MongoDB instead of on go server as json
 
 	var opResp OverpassResponse
 	if err := json.Unmarshal(body, &opResp); err != nil {
 		return nil, fmt.Errorf("unmarshal Overpass response failed: %w", err)
 	}
 
-	// []Business is what we want to return
+	// []Business is intended return
 	var businesses []Business
 	for _, el := range opResp.Elements {
 		name := el.Tags["name"]
@@ -153,6 +155,7 @@ out;`,
 			Lon:  el.Lon,
 		})
 	}
+
 
 	return businesses, nil
 }
