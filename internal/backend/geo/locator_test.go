@@ -9,7 +9,7 @@ func TestBusinessStruct(t *testing.T) {
 	business := Business{
 		Name:   "Test Company",
 		URL:    "https://example.com",
-		Titles: []string{"engineer"},
+		Titles: []string{"job"},
 		Lat:    40.7128,
 		Lon:    -74.0060,
 	}
@@ -155,7 +155,7 @@ func TestFindBusinessesByZipIntegration(t *testing.T) {
 	
 	// Test with a known zip code
 	zip := "45140" // Known zip code in Ohio, not too many businesses to scrape
-	radius := 2    // 1 mile radius (very small for testing)
+	radius := 2    // 2 mile radius (very small for testing)
 	
 	businesses, err := FindBusinessesByZip(zip, radius)
 	if err != nil {
