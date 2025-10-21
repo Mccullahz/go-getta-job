@@ -88,14 +88,8 @@ func LocateBusinesses(lat float64, lon float64, radius int) ([]Business, error) 
   node["office"]["name"](around:%d,%f,%f);
   node["craft"]["name"](around:%d,%f,%f);
   node["tourism"]["name"](around:%d,%f,%f);
-  node["leisure"]["name"](around:%d,%f,%f);
-  node["building"]["office"]["name"](around:%d,%f,%f);
-  node["building"]["commercial"]["name"](around:%d,%f,%f);
 );
 out;`,
-		radius*1609, lat, lon,
-		radius*1609, lat, lon,
-		radius*1609, lat, lon,
 		radius*1609, lat, lon,
 		radius*1609, lat, lon,
 		radius*1609, lat, lon,
@@ -127,7 +121,7 @@ out;`,
 
 	var opResp OverpassResponse
 	if err := json.Unmarshal(body, &opResp); err != nil {
-		return nil, fmt.Errorf("unmarshal Overpass response failed: %w", err)
+		return nil, fmt.Errorf("Error parsing Overpass JSON: %w", err)
 	}
 
 	// []Business is intended return

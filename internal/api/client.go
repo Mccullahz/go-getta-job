@@ -11,6 +11,9 @@ import (
 	"net/url"
 	"time"
 	"fmt"
+	"io"
+	"bytes"
+	"strings"
 	"encoding/json"
 
 )
@@ -56,32 +59,68 @@ func (c *Client) Search(zip, radius, title string) ([]utils.JobPageResult, error
 	params.Set("title", title)
 
 	url := fmt.Sprintf("%s/search?%s", c.BaseURL, params.Encode())
+
 	resp, err := c.HTTPClient.Get(url)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to call API: %w", err)
 	}
 	defer resp.Body.Close()
 
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response: %w", err)
+	}
+
+	// handle Overpass HTML responses early
+	if bytes.HasPrefix(bytes.TrimSpace(body), []byte("<")) {
+		return nil, fmt.Errorf("backend returned HTML instead of JSON (likely Overpass error or rate limit)\nURL: %s\nBody: %s", url, string(body[:120]))
+	}
+
+	// handle non-200 statuses
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("backend returned status %d: %s", resp.StatusCode, string(body))
+	}
+
+	// decode the unified response
 	var apiResp Response
-	if err := json.NewDecoder(resp.Body).Decode(&apiResp); err != nil {
-		return nil, err
+	if err := json.Unmarshal(body, &apiResp); err != nil {
+		return nil, fmt.Errorf("invalid JSON from API: %w\nBody:\n%s", err, string(body[:200]))
 	}
 
+	// handle no results cleanly
 	if apiResp.Status != "ok" {
-		return nil, fmt.Errorf("search failed: %s", apiResp.Message)
+		msg := apiResp.Message
+		if strings.Contains(msg, "must provide at least one element") || strings.Contains(msg, "no businesses found") {
+			// treat as valid empty result
+			return []utils.JobPageResult{}, nil
+		}
+		if msg == "" {
+			msg = "unknown backend error"
+		}
+		return nil, fmt.Errorf("search failed: %s", msg)
 	}
 
-	// decoding Data.results into []utils.JobPageResult
+	// gracefully handle missing or empty data
+	if len(apiResp.Data) == 0 {
+		return []utils.JobPageResult{}, nil
+	}
+
 	var payload struct {
-		Zip    string               `json:"zip"`
-		Radius int               `json:"radius"`
-		Title  string               `json:"title"`
+		Zip     string               `json:"zip"`
+		Radius  int                  `json:"radius"`
+		Title   string               `json:"title"`
 		Results []utils.JobPageResult `json:"results"`
 	}
 
-	if err := json.Unmarshal(apiResp.Data, &payload); err !=nil {
-		return nil, err
+	if err := json.Unmarshal(apiResp.Data, &payload); err != nil {
+		return nil, fmt.Errorf("failed to decode payload: %w\nData:\n%s", err, string(apiResp.Data))
 	}
+
+	// return empty but valid slice if nothing found
+	if len(payload.Results) == 0 {
+		return []utils.JobPageResult{}, nil
+	}
+
 	return payload.Results, nil
 }
 
