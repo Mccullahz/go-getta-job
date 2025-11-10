@@ -56,6 +56,12 @@ func UpdateHome(m model.Model, msg tea.Msg) (model.Model, tea.Cmd) {
 				m.StarredList = components.NewStarredList(m.Starred, m.Width, m.Height-2)
 				m.CurrentState = model.StateStarred
 			}
+			if curHeader == "Settings" && curOption == "Account Settings" {
+				m.CurrentState = model.StateAccount
+			}
+			if curHeader == "Settings" && curOption == "Output - Export Preferences" {
+				m.CurrentState = model.StateExport
+			}
 			// other options to be handled later
 
 		}

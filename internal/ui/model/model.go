@@ -19,6 +19,8 @@ const (
     StateSearching
     StateStarred
     StateDone
+    StateAccount
+    StateExport
 )
 
 type Model struct {
@@ -58,6 +60,10 @@ func PreviousState(s state) state {
 	case StateStarred:
 		return StateHome
 	case StateDone:
+		return StateHome
+	case StateAccount:
+		return StateHome
+	case StateExport:
 		return StateHome
 	default:
 		return StateHome

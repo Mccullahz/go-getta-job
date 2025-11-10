@@ -145,6 +145,10 @@ func (u UI) View() string {
 		} else {
 			b.WriteString(u.StarredList.View())
 		}
+	case model.StateAccount:
+		b.WriteString(states.ViewAccountSettings(u.Model))
+	case model.StateExport:
+		b.WriteString(states.ViewExportSettings(u.Model))
 	case model.StateDone:
 	    if u.ShowResults {
 	        b.WriteString(u.ResultsList.View())
