@@ -56,7 +56,7 @@ func (r *JobResultRepository) GetLatestJobResults(userID primitive.ObjectID) (*J
 	defer cancel()
 
 	filter := bson.M{"user_id": userID}
-	opts := options.FindOne().SetSort(bson.D{{"created_at", -1}})
+	opts := options.FindOne().SetSort(bson.D{{Key: "created_at", Value: -1}})
 
 	var jobResult JobResult
 	err := r.collection.FindOne(ctx, filter, opts).Decode(&jobResult)
@@ -75,7 +75,7 @@ func (r *JobResultRepository) GetAllJobResults(userID primitive.ObjectID) ([]Job
 	defer cancel()
 
 	filter := bson.M{"user_id": userID}
-	opts := options.Find().SetSort(bson.D{{"created_at", -1}})
+	opts := options.Find().SetSort(bson.D{{Key: "created_at", Value: -1}})
 
 	cursor, err := r.collection.Find(ctx, filter, opts)
 	if err != nil {
