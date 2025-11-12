@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"path/filepath"
 	"sort"
 	"os"
@@ -62,7 +61,7 @@ func LoadLatestResults(dir string) ([]JobPageResult, error) {
 		return files[i] > files[j]
 	})
 
-	data, err := ioutil.ReadFile(files[0])
+	data, err := os.ReadFile(files[0])
 	if err != nil {
 		return nil, err
 	}
@@ -156,17 +155,17 @@ func (dm *DatabaseManager) WriteResultsToDB(userID primitive.ObjectID, queryTitl
 
 	for _, result := range results {
 		businessKey := result.BusinessName + "|" + result.URL
-		business, exists := businessMap[businessKey]
+		biz, exists := businessMap[businessKey]
 		if !exists {
-			business = database.Business{
+			biz = database.Business{
 				Name:    result.BusinessName,
 				URL:     result.URL,
 				Address: "Address not available", // placeholder address
 				Lat:     0,  // coordinates will be set from geo data if available
 				Lon:     0,
 			}
-			businessMap[businessKey] = business
-			businesses = append(businesses, business)
+			businessMap[businessKey] = biz
+			businesses = append(businesses, biz)
 			businessCounter++
 		}
 
@@ -189,7 +188,6 @@ func (dm *DatabaseManager) WriteResultsToDB(userID primitive.ObjectID, queryTitl
 	fmt.Printf("WriteResultsToDB: Saved %d businesses successfully\n", len(businessIDs))
 
 	// update jobs with business IDs by matching business names
-	jobIDs := make([]primitive.ObjectID, 0, len(jobs))
 	for i, job := range jobs {
 		found := false
 		for j, business := range businesses {
@@ -206,7 +204,7 @@ func (dm *DatabaseManager) WriteResultsToDB(userID primitive.ObjectID, queryTitl
 	}
 
 	fmt.Printf("WriteResultsToDB: Saving %d jobs\n", len(jobs))
-	jobIDs, err = dm.jobRepo.SaveJobs(jobs)
+	jobIDs, err := dm.jobRepo.SaveJobs(jobs)
 	if err != nil {
 		return fmt.Errorf("failed to save jobs: %w", err)
 	}
