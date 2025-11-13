@@ -4,8 +4,8 @@
 - To keep up with the developement of this project, please visit [the devlog for this project](https://mccullahz.github.io/#/articles/job-scraper-cli).
 
 # Features
-- Sleek terminal interface using [Bubbletea(https://github.com/charmbracelet/bubbletea)] + [Lipgloss(https://github.com/charmbracelet/lipgloss)]
-- Scraping + Geo locational via ZIP built with Go's Standard Libraries + [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API)]
+- Sleek terminal interface using [Bubbletea](https://github.com/charmbracelet/bubbletea) + [Lipgloss](https://github.com/charmbracelet/lipgloss)
+- Scraping + Geo locational via ZIP built with Go's Standard Libraries + [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API)
 
 # Usage
 - This project is still in early development and not yet ready for public use, however, if you are so inclined, you can either download the binary from the releases tab or build the project yourself.
