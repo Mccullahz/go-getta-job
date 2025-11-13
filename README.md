@@ -69,7 +69,7 @@ ME_CONFIG_BASICAUTH_PASSWORD=express_user_password
   docker compose up -d
   ```
 
-- After the containers are running, you can execute the Go Getta Job application with persistent database support:
+- After the containers are running, you can execute the Go Getta Job application with semi-persistent database support:
   ```bash
   go run ./cmd/tui
   ```
