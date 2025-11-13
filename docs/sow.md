@@ -32,7 +32,7 @@ Specific features, deliverables, and services to be included:
 - Unit and integration testing.
 
 ### 4.2 Out of Scope
-Clarify what will not be covered:
+Clarify what will not be covered in this project:
 
 - Mobile native apps.
 - Windows/Mac desktop applications.
@@ -42,12 +42,12 @@ Clarify what will not be covered:
 
 ## 5. Deliverables
 
-| Deliverable               | Description                                |
-|---------------------------|--------------------------------------------|
-| Backend API               | API's from Yelp / Google Maps              |
-| Frontend App              | Responsive TUI integrated with backend serv|
-| Testing & QA              | Unit and integration test reports          |
-| Final Deployment          | Live deployment with CI/CD Pipeline        |
+| Deliverable               | Description                                     |
+|---------------------------|-------------------------------------------------|
+| Backend API               | API's from ~~Yelp / Google Maps~~ Overpass+Zippo|
+| Frontend App              | Responsive TUI integrated with backend services |
+| Testing & QA              | Unit and integration test reports               |
+| Final Deployment          | Live deployment with CI/CD Pipeline             |
 
 ---
 
@@ -58,7 +58,7 @@ gantt
 title Project Timeline
 dateFormat  YYYY-MM-DD
 section Planning
-    No Timeline Data Needed For This Project      :a1, 2023-10-01, 2w
+    No Timeline Data Needed For This Project      :a1, 2025-10-01, 2w
 ```
 
 ---
