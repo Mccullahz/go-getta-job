@@ -34,11 +34,13 @@
 - Note: If you choose to run the project directly without building, ensure that you have all necessary dependencies installed. You can use Go modules to manage dependencies via:
   ```bash
   go mod tidy
- ```
+  ```
+
 ## Using Docker
 - To run the application with persistent data storage you will need to use Docker to setup the containerized Mongo database., you can do this by using the provided `docker-compose.yml` file.
 - With Docker installed, you will need to setup your environment variables. You can do this by creating a `.env` file in the root directory of the project. Here is an example of the file content:
-  ```env
+
+```bash
 # .env
 
 TZ=America/New_York
@@ -61,7 +63,7 @@ ME_CONFIG_MONGODB_SERVER=mongodb
 ME_CONFIG_MONGODB_PORT=27017
 ME_CONFIG_BASICAUTH_USERNAME=express_user_username
 ME_CONFIG_BASICAUTH_PASSWORD=express_user_password
-  ```
+```
 - Once your `.env` file is set up, you can start the Docker containers using Docker Compose:
   ```bash
   docker compose up -d
