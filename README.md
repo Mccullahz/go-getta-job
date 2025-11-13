@@ -34,4 +34,40 @@
 - Note: If you choose to run the project directly without building, ensure that you have all necessary dependencies installed. You can use Go modules to manage dependencies via:
   ```bash
   go mod tidy
+ ```
+## Using Docker
+- To run the application with persistent data storage you will need to use Docker to setup the containerized Mongo database., you can do this by using the provided `docker-compose.yml` file.
+- With Docker installed, you will need to setup your environment variables. You can do this by creating a `.env` file in the root directory of the project. Here is an example of the file content:
+  ```env
+# .env
+
+TZ=America/New_York
+
+# mongo root user
+MONGO_INITDB_ROOT_USERNAME=mongo_username
+MONGO_INITDB_ROOT_PASSWORD=mongo_password
+MONGO_DB_NAME=job_search_db
+
+# mongo URI
+MONGODB_URI=mongodb://mongo_username:mongo_password@mongodb:27017/job_search_db?authSource=admin
+
+# enable database mode (set to "true" to use mongo instead of files)
+USE_DATABASE=true
+
+# express
+ME_CONFIG_MONGODB_ADMINUSERNAME=express_admin_username
+ME_CONFIG_MONGODB_ADMINPASSWORD=express_admin_password
+ME_CONFIG_MONGODB_SERVER=mongodb
+ME_CONFIG_MONGODB_PORT=27017
+ME_CONFIG_BASICAUTH_USERNAME=express_user_username
+ME_CONFIG_BASICAUTH_PASSWORD=express_user_password
+  ```
+- Once your `.env` file is set up, you can start the Docker containers using Docker Compose:
+  ```bash
+  docker compose up -d
+  ```
+
+- After the containers are running, you can execute the Go Getta Job application with persistent database support:
+  ```bash
+  go run ./cmd/tui
   ```
