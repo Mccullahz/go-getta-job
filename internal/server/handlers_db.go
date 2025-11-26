@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"cliscraper/internal/backend/geo"
 	"cliscraper/internal/utils"
@@ -47,7 +48,29 @@ func (h *DatabaseHandlers) SearchHandlerDB(w http.ResponseWriter, r *http.Reques
 	// step 1: find businesses by zip
 	businesses, err := geo.FindBusinessesByZip(zip, radius)
 	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, Response{Status: "error", Message: err.Error()})
+		// Check if this is a "no results" error (not a real failure)
+		errMsg := strings.ToLower(err.Error())
+		if strings.Contains(errMsg, "must provide at least one element") ||
+			strings.Contains(errMsg, "no businesses found") ||
+			strings.Contains(errMsg, "no results") {
+			writeJSON(w, http.StatusOK, Response{
+				Status: "ok",
+				Message: "No matching jobs found. Please try adjusting your search criteria (zip code, radius, or job title).",
+				Data: map[string]interface{}{
+					"user_id": userID.Hex(),
+					"zip":     zip,
+					"radius":  radius,
+					"title":   title,
+					"results": []interface{}{},
+				},
+			})
+			return
+		}
+		// Real server error - return user-friendly message
+		writeJSON(w, http.StatusInternalServerError, Response{
+			Status:  "error",
+			Message: "Unable to search for businesses. Please try again later.",
+		})
 		return
 	}
 
@@ -55,13 +78,13 @@ func (h *DatabaseHandlers) SearchHandlerDB(w http.ResponseWriter, r *http.Reques
 	if len(businesses) == 0 {
 		writeJSON(w, http.StatusOK, Response{
 			Status: "ok",
+			Message: "No businesses found in the specified area. Please try adjusting your zip code or search radius.",
 			Data: map[string]interface{}{
-				"user_id":  userID.Hex(),
-				"zip":      zip,
-				"radius":   radius,
-				"title":    title,
-				"message":  "No businesses found in the specified area",
-				"results":  []interface{}{},
+				"user_id": userID.Hex(),
+				"zip":     zip,
+				"radius":  radius,
+				"title":   title,
+				"results": []interface{}{},
 			},
 		})
 		return
@@ -101,8 +124,46 @@ func (h *DatabaseHandlers) SearchHandlerDB(w http.ResponseWriter, r *http.Reques
 	}
 
 	// step 5: store results in MongoDB
+	// If no job results found, return a user-friendly message instead of error
+	if len(jobResults) == 0 {
+		writeJSON(w, http.StatusOK, Response{
+			Status: "ok",
+			Message: fmt.Sprintf("No matching jobs found for '%s' in the specified area. Please try adjusting your search criteria.", title),
+			Data: map[string]interface{}{
+				"user_id": userID.Hex(),
+				"zip":     zip,
+				"radius":  radius,
+				"title":   title,
+				"results": []interface{}{},
+			},
+		})
+		return
+	}
+
 	if err := h.dbManager.WriteResultsToDB(userID, title, jobResults); err != nil {
-		writeJSON(w, http.StatusInternalServerError, Response{Status: "error", Message: err.Error()})
+		// Check if this is a "no data" error that we should handle gracefully
+		errMsg := strings.ToLower(err.Error())
+		if strings.Contains(errMsg, "must provide at least one element") ||
+			strings.Contains(errMsg, "no data") ||
+			strings.Contains(errMsg, "empty") {
+			writeJSON(w, http.StatusOK, Response{
+				Status: "ok",
+				Message: fmt.Sprintf("No matching jobs found for '%s' in the specified area. Please try adjusting your search criteria.", title),
+				Data: map[string]interface{}{
+					"user_id": userID.Hex(),
+					"zip":     zip,
+					"radius":  radius,
+					"title":   title,
+					"results": []interface{}{},
+				},
+			})
+			return
+		}
+		// Real database error
+		writeJSON(w, http.StatusInternalServerError, Response{
+			Status:  "error",
+			Message: "Unable to save search results. Please try again later.",
+		})
 		return
 	}
 
@@ -113,18 +174,7 @@ func (h *DatabaseHandlers) SearchHandlerDB(w http.ResponseWriter, r *http.Reques
 		// don't fail the request for this
 	}
 
-	// convert worker pool results to JobPageResult format for API compatibility
-	jobPageResults := make([]utils.JobPageResult, 0, len(results))
-	for _, res := range results {
-		if res.Error == nil && res.JobPage != "" {
-			jobPageResults = append(jobPageResults, utils.JobPageResult{
-				BusinessName: res.BusinessName,
-				URL:          res.JobPage,
-				Description:  "", // no description available from worker pool
-			})
-		}
-	}
-
+	// Return successful response with job results (already checked for empty above)
 	writeJSON(w, http.StatusOK, Response{
 		Status: "ok",
 		Data: map[string]interface{}{
@@ -132,7 +182,7 @@ func (h *DatabaseHandlers) SearchHandlerDB(w http.ResponseWriter, r *http.Reques
 			"zip":     zip,
 			"radius":  radius,
 			"title":   title,
-			"results": jobPageResults,
+			"results": jobResults,
 		},
 	})
 }
@@ -147,7 +197,10 @@ func (h *DatabaseHandlers) ResultsHandlerDB(w http.ResponseWriter, r *http.Reque
 	results, err := h.dbManager.LoadLatestResultsFromDB(userID)
 	if err != nil {
 		fmt.Printf("Failed to load results: %v\n", err)
-		writeJSON(w, http.StatusNotFound, Response{Status: "error", Message: "results not found"})
+		writeJSON(w, http.StatusNotFound, Response{
+			Status:  "error",
+			Message: "No search results found. Please perform a search first.",
+		})
 		return
 	}
 	fmt.Printf("Loaded %d results\n", len(results))

@@ -41,7 +41,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         writeJSON(w, http.StatusBadRequest, Response{
             Status:  "error",
-            Message: "invalid radius",
+            Message: "Invalid radius. Please provide a valid number.",
         })
         return
     }
@@ -50,11 +50,13 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
     businesses, err := geo.FindBusinessesByZip(zip, radius)
     if err != nil {
         // "no input slice" case as no results, not failure
+        errMsg := strings.ToLower(err.Error())
         if strings.Contains(err.Error(), "must provide at least one element in input slice") ||
-            strings.Contains(strings.ToLower(err.Error()), "no businesses found") {
+            strings.Contains(errMsg, "no businesses found") ||
+            strings.Contains(errMsg, "no results") {
             writeJSON(w, http.StatusOK, Response{
                 Status:  "ok",
-                Message: "no businesses found in specified area",
+                Message: "No matching jobs found. Please try adjusting your search criteria (zip code, radius, or job title).",
                 Data: map[string]interface{}{
                     "zip":     zip,
                     "radius":  radius,
@@ -68,7 +70,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
         // otherwise, it's a real server error
         writeJSON(w, http.StatusInternalServerError, Response{
             Status:  "error",
-            Message: fmt.Sprintf("failed to locate businesses: %v", err),
+            Message: "Unable to search for businesses. Please try again later.",
         })
         return
     }
@@ -77,7 +79,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
     if len(businesses) == 0 {
         writeJSON(w, http.StatusOK, Response{
             Status:  "ok",
-            Message: "no businesses found in specified area",
+            Message: "No businesses found in the specified area. Please try adjusting your zip code or search radius.",
             Data: map[string]interface{}{
                 "zip":     zip,
                 "radius":  radius,
@@ -105,7 +107,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
     if len(jobs) == 0 {
         writeJSON(w, http.StatusOK, Response{
             Status:  "ok",
-            Message: "businesses found, but none have valid URLs",
+            Message: "Businesses found, but none have valid job posting URLs. Please try a different area or job title.",
             Data: map[string]interface{}{
                 "zip":     zip,
                 "radius":  radius,
@@ -141,10 +143,23 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
         if err := utils.WriteResults(jobResults, outDir); err != nil {
             writeJSON(w, http.StatusInternalServerError, Response{
                 Status:  "error",
-                Message: fmt.Sprintf("failed to save results: %v", err),
+                Message: "Unable to save search results. Please try again later.",
             })
             return
         }
+    } else {
+        // No results found after scraping
+        writeJSON(w, http.StatusOK, Response{
+            Status: "ok",
+            Message: fmt.Sprintf("No matching jobs found for '%s' in the specified area. Please try adjusting your search criteria.", title),
+            Data: map[string]interface{}{
+                "zip":     zip,
+                "radius":  radius,
+                "title":   title,
+                "results": []utils.JobPageResult{},
+            },
+        })
+        return
     }
 
     id := uuid.New().String()
@@ -168,7 +183,10 @@ func ResultsHandler(w http.ResponseWriter, r *http.Request) {
     outDir := "./output"
     results, err := utils.LoadLatestResults(outDir)
     if err != nil {
-        writeJSON(w, http.StatusNotFound, Response{Status: "error", Message: "results not found"})
+        writeJSON(w, http.StatusNotFound, Response{
+            Status:  "error",
+            Message: "No search results found. Please perform a search first.",
+        })
         return
     }
 	writeJSON(w, http.StatusOK, Response{
