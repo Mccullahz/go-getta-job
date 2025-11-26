@@ -104,6 +104,11 @@ func NewJobRepository(repo *Repository) *JobRepository {
 }
 
 func (r *JobRepository) SaveJobs(jobs []Job) ([]primitive.ObjectID, error) {
+	// Handle empty slice gracefully - this is not an error, just no data to save
+	if len(jobs) == 0 {
+		return []primitive.ObjectID{}, nil
+	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -160,6 +165,11 @@ func NewBusinessRepository(repo *Repository) *BusinessRepository {
 }
 
 func (r *BusinessRepository) SaveBusinesses(businesses []Business) ([]primitive.ObjectID, error) {
+	// Handle empty slice gracefully - this is not an error, just no data to save
+	if len(businesses) == 0 {
+		return []primitive.ObjectID{}, nil
+	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
