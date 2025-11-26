@@ -76,28 +76,47 @@ func (c *Client) Search(zip, radius, title string) ([]utils.JobPageResult, error
 		return nil, fmt.Errorf("backend returned HTML instead of JSON (likely Overpass error or rate limit)\nURL: %s\nBody: %s", url, string(body[:120]))
 	}
 
-	// handle non-200 statuses
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("backend returned status %d: %s", resp.StatusCode, string(body))
-	}
-
-	// decode the unified response
+	// decode the unified response first to extract user-friendly messages
 	var apiResp Response
 	if err := json.Unmarshal(body, &apiResp); err != nil {
+		// If we can't decode JSON and status is not OK, return a cleaner error
+		if resp.StatusCode != http.StatusOK {
+			return nil, fmt.Errorf("search failed: server returned an error. Please try again later.")
+		}
 		return nil, fmt.Errorf("invalid JSON from API: %w\nBody:\n%s", err, string(body[:200]))
+	}
+
+	// handle non-200 statuses - extract message from response if available
+	if resp.StatusCode != http.StatusOK {
+		msg := apiResp.Message
+		if msg == "" {
+			msg = "Search failed. Please try again later."
+		}
+		// Check if this is a "no results" case that should be treated as success
+		msgLower := strings.ToLower(msg)
+		if strings.Contains(msgLower, "no matching jobs") ||
+			strings.Contains(msgLower, "no businesses found") ||
+			strings.Contains(msgLower, "must provide at least one element") ||
+			strings.Contains(msgLower, "no results") {
+			return []utils.JobPageResult{}, nil
+		}
+		return nil, fmt.Errorf("%s", msg)
 	}
 
 	// handle no results cleanly
 	if apiResp.Status != "ok" {
 		msg := apiResp.Message
-		if strings.Contains(msg, "must provide at least one element") || strings.Contains(msg, "no businesses found") {
+		if strings.Contains(strings.ToLower(msg), "must provide at least one element") ||
+			strings.Contains(strings.ToLower(msg), "no businesses found") ||
+			strings.Contains(strings.ToLower(msg), "no matching jobs") ||
+			strings.Contains(strings.ToLower(msg), "no results") {
 			// treat as valid empty result
 			return []utils.JobPageResult{}, nil
 		}
 		if msg == "" {
-			msg = "unknown backend error"
+			msg = "Search failed. Please try again later."
 		}
-		return nil, fmt.Errorf("search failed: %s", msg)
+		return nil, fmt.Errorf("%s", msg)
 	}
 
 	// gracefully handle missing or empty data
@@ -137,7 +156,11 @@ func (c *Client) Results() ([]utils.JobPageResult, error) {
 		return nil, err
 	}
 	if apiResp.Status != "ok" {
-		return nil, fmt.Errorf("results failed: %s", apiResp.Message)
+		msg := apiResp.Message
+		if msg == "" {
+			msg = "Unable to retrieve results. Please try again later."
+		}
+		return nil, fmt.Errorf("%s", msg)
 	}
 
 	var payload struct {
@@ -163,7 +186,11 @@ func (c *Client) Starred() ([]utils.JobPageResult, error) {
 		return nil, err
 	}
 	if apiResp.Status != "ok" {
-		return nil, fmt.Errorf("starred failed: %s", apiResp.Message)
+		msg := apiResp.Message
+		if msg == "" {
+			msg = "Unable to retrieve starred jobs. Please try again later."
+		}
+		return nil, fmt.Errorf("%s", msg)
 	}
 
 	var starred []utils.JobPageResult
