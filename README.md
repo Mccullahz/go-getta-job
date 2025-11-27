@@ -5,7 +5,7 @@
 
 # Features
 - Sleek terminal interface using [Bubbletea](https://github.com/charmbracelet/bubbletea) + [Lipgloss](https://github.com/charmbracelet/lipgloss)
-- Scraping + Geo locational via ZIP built with Go's Standard Libraries + [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API)
+- Scraping + Geo locational via ZIP built with Go's Standard Libraries + [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) + [Zippopotam.us](http://www.zippopotam.us/)
 
 # Usage
 - This project is still in early development and not yet ready for public use, however, if you are so inclined, you can either download the binary from the releases tab or build the project yourself.
