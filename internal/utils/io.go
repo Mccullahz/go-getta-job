@@ -27,6 +27,7 @@ type DatabaseManager struct {
 	businessRepo *database.BusinessRepository
 	jobResultRepo *database.JobResultRepository
 	geoResultRepo *database.GeoResultRepository
+	userRepo   *database.UserRepository
 }
 
 func NewDatabaseManager() (*DatabaseManager, error) {
@@ -43,11 +44,16 @@ func NewDatabaseManager() (*DatabaseManager, error) {
 		businessRepo:  database.NewBusinessRepository(repo),
 		jobResultRepo: database.NewJobResultRepository(repo),
 		geoResultRepo: database.NewGeoResultRepository(repo),
+		userRepo:      database.NewUserRepository(repo),
 	}, nil
 }
 
 func (dm *DatabaseManager) Close() error {
 	return dm.client.Close()
+}
+
+func (dm *DatabaseManager) GetUserRepo() *database.UserRepository {
+	return dm.userRepo
 }
 
 // legacy, keeping for non-database use cases

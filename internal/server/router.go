@@ -44,6 +44,9 @@ func NewDatabaseRouter() (http.Handler, error) {
 	}
 	fmt.Println("Database handlers created successfully")
 
+	// Create user handler
+	userHandler := dbHandlers.GetUserHandler()
+
 	// cleanup middleware to close database connection
 	r.Use(func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
@@ -56,6 +59,10 @@ func NewDatabaseRouter() (http.Handler, error) {
 	r.Get("/search", dbHandlers.SearchHandlerDB)
 	r.Get("/results", dbHandlers.ResultsHandlerDB)
 	r.Get("/starred", dbHandlers.StarredHandlerDB)
+
+	// user auth routes -- these are working as intended
+	r.Post("/api/register", userHandler.RegisterHandler)
+	r.Post("/api/login", userHandler.LoginHandler)
 
 	return r, nil
 }

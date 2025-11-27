@@ -26,6 +26,11 @@ func writeJSON(w http.ResponseWriter, status int, data interface{}) {
 	_ = json.NewEncoder(w).Encode(data)
 }
 
+// exported version of writeJSON for use in other packages
+func WriteJSON(w http.ResponseWriter, status int, data interface{}) {
+	writeJSON(w, status, data)
+}
+
 // health check
 func HealthHandler(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, Response{Status: "ok"})

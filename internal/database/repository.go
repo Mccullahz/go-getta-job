@@ -242,3 +242,86 @@ func (r *GeoResultRepository) SaveGeoResult(userID primitive.ObjectID, zip strin
 	geoResult.ID = result.InsertedID.(primitive.ObjectID)
 	return geoResult, nil
 }
+
+type UserRepository struct {
+	*Repository
+	collection *mongo.Collection
+}
+
+func NewUserRepository(repo *Repository) *UserRepository {
+	return &UserRepository{
+		Repository: repo,
+		collection: repo.client.GetCollection("users"),
+	}
+}
+
+func (r *UserRepository) CreateUser(username, email, passwordHash string) (*User, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// Check if username already exists
+	var existingUser User
+	err := r.collection.FindOne(ctx, bson.M{"username": username}).Decode(&existingUser)
+	if err == nil {
+		return nil, fmt.Errorf("username already exists")
+	}
+	if err != mongo.ErrNoDocuments {
+		return nil, fmt.Errorf("failed to check username: %w", err)
+	}
+
+	// Check if email already exists
+	err = r.collection.FindOne(ctx, bson.M{"email": email}).Decode(&existingUser)
+	if err == nil {
+		return nil, fmt.Errorf("email already exists")
+	}
+	if err != mongo.ErrNoDocuments {
+		return nil, fmt.Errorf("failed to check email: %w", err)
+	}
+
+	user := &User{
+		Username:     username,
+		Email:        email,
+		PasswordHash: passwordHash,
+		CreatedAt:    time.Now(),
+	}
+
+	result, err := r.collection.InsertOne(ctx, user)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create user: %w", err)
+	}
+
+	user.ID = result.InsertedID.(primitive.ObjectID)
+	return user, nil
+}
+
+func (r *UserRepository) GetUserByUsername(username string) (*User, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	var user User
+	err := r.collection.FindOne(ctx, bson.M{"username": username}).Decode(&user)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, fmt.Errorf("user not found")
+		}
+		return nil, fmt.Errorf("failed to get user: %w", err)
+	}
+
+	return &user, nil
+}
+
+func (r *UserRepository) GetUserByID(userID primitive.ObjectID) (*User, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	var user User
+	err := r.collection.FindOne(ctx, bson.M{"_id": userID}).Decode(&user)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, fmt.Errorf("user not found")
+		}
+		return nil, fmt.Errorf("failed to get user: %w", err)
+	}
+
+	return &user, nil
+}

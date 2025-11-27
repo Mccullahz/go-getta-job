@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"cliscraper/internal/api"
 	"cliscraper/internal/backend/geo"
 	"cliscraper/internal/utils"
 	"cliscraper/internal/backend/web"
@@ -14,7 +15,8 @@ import (
 )
 
 type DatabaseHandlers struct {
-	dbManager *utils.DatabaseManager
+	dbManager  *utils.DatabaseManager
+	userHandler *api.UserHandler
 }
 
 func NewDatabaseHandlers() (*DatabaseHandlers, error) {
@@ -23,13 +25,20 @@ func NewDatabaseHandlers() (*DatabaseHandlers, error) {
 		return nil, fmt.Errorf("failed to create database manager: %w", err)
 	}
 
+	userHandler := api.NewUserHandler(dbManager.GetUserRepo())
+
 	return &DatabaseHandlers{
-		dbManager: dbManager,
+		dbManager:  dbManager,
+		userHandler: userHandler,
 	}, nil
 }
 
 func (h *DatabaseHandlers) Close() error {
 	return h.dbManager.Close()
+}
+
+func (h *DatabaseHandlers) GetUserHandler() *api.UserHandler {
+	return h.userHandler
 }
 
 func (h *DatabaseHandlers) SearchHandlerDB(w http.ResponseWriter, r *http.Request) {
