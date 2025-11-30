@@ -43,6 +43,14 @@ type Model struct {
     InnerCursor int
     TopCursor int
 
+    // account specific fields
+    AccountMode    string // "login" or "register"
+    AccountField   string // "username", "email", "password"
+    Username       string
+    Email          string
+    Password       string
+    CurrentUser    *UserInfo
+
     Width  int
     Height int
 }
@@ -79,6 +87,8 @@ func InitialModel(svc Service) Model {
 	Spinner: components.InitialSpinner(),
 	TopCursor: 0,
 	InnerCursor: 0,
+	AccountMode: "login", // default to login
+	AccountField: "username",
 	}
 }
 

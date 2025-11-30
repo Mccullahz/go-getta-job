@@ -11,5 +11,15 @@ type Service interface {
 	Search(zip, radius, title string) ([]utils.JobPageResult, error)
 	Results() ([]utils.JobPageResult, error)
 	Starred() ([]utils.JobPageResult, error)
+	Register(username, email, password string) (*UserInfo, error)
+	Login(username, password string) (*UserInfo, error)
+}
+
+// struct for user data from authentication, send to ui
+type UserInfo struct {
+	ID        string `json:"id"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	CreatedAt string `json:"created_at"`
 }
 
