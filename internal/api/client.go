@@ -7,6 +7,7 @@ package api
 
 import (
 	"cliscraper/internal/utils"
+	"cliscraper/internal/ui/model"
 	"net/http"
 	"net/url"
 	"time"
@@ -199,4 +200,97 @@ func (c *Client) Starred() ([]utils.JobPageResult, error) {
 	}
 
 	return starred, nil
+}
+
+// create new user account
+func (c *Client) Register(username, email, password string) (*model.UserInfo, error) {
+	url := fmt.Sprintf("%s/api/register", c.BaseURL)
+
+	reqBody := map[string]string{
+		"username": username,
+		"email":    email,
+		"password": password,
+	}
+
+	jsonData, err := json.Marshal(reqBody)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal request: %w", err)
+	}
+
+	resp, err := c.HTTPClient.Post(url, "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		return nil, fmt.Errorf("failed to call API: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response: %w", err)
+	}
+
+	var apiResp Response
+	if err := json.Unmarshal(body, &apiResp); err != nil {
+		return nil, fmt.Errorf("invalid JSON from API: %w", err)
+	}
+
+	if apiResp.Status != "ok" {
+		msg := apiResp.Message
+		if msg == "" {
+			msg = "Registration failed. Please try again."
+		}
+		return nil, fmt.Errorf("%s", msg)
+	}
+
+	var userInfo model.UserInfo
+	if err := json.Unmarshal(apiResp.Data, &userInfo); err != nil {
+		return nil, fmt.Errorf("failed to decode user data: %w", err)
+	}
+
+	return &userInfo, nil
+}
+
+// basic user auth, returns user info on success, there's certainly a better approach here but this works for the time being
+func (c *Client) Login(username, password string) (*model.UserInfo, error) {
+	url := fmt.Sprintf("%s/api/login", c.BaseURL)
+
+	reqBody := map[string]string{
+		"username": username,
+		"password": password,
+	}
+
+	jsonData, err := json.Marshal(reqBody)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal request: %w", err)
+	}
+
+	resp, err := c.HTTPClient.Post(url, "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		return nil, fmt.Errorf("failed to call API: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response: %w", err)
+	}
+
+	var apiResp Response
+	if err := json.Unmarshal(body, &apiResp); err != nil {
+		return nil, fmt.Errorf("invalid JSON from API: %w", err)
+	}
+
+	if apiResp.Status != "ok" {
+		msg := apiResp.Message
+		if msg == "" {
+			msg = "Login failed. Please check your credentials."
+		}
+		return nil, fmt.Errorf("%s", msg)
+	}
+
+	var userInfo model.UserInfo
+	if err := json.Unmarshal(apiResp.Data, &userInfo); err != nil {
+		return nil, fmt.Errorf("failed to decode user data: %w", err)
+	}
+
+	return &userInfo, nil
 }
