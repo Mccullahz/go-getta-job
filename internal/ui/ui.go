@@ -104,6 +104,8 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			u.Model, cmd = states.UpdateTitle(u.Model, msg)
 		case model.StateSearching:
 			u.Model, cmd = states.UpdateSearching(u.Model, msg)
+		case model.StateAccount:
+			u.Model, cmd = states.UpdateAccount(u.Model, msg)
 		case model.StateStarred:
 			var c tea.Cmd
 			u.StarredList, c = u.StarredList.Update(msg)
@@ -118,6 +120,8 @@ func (u UI) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case messages.DoneMsg:
 		u.Model, cmd = states.UpdateSearching(u.Model, msg)
+	case messages.AuthDoneMsg:
+		u.Model, cmd = states.UpdateAccount(u.Model, msg)
 	}
 
 	return u, cmd
