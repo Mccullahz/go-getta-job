@@ -35,7 +35,7 @@ func NewWorkerPool(numWorkers int, timeout time.Duration) *WorkerPool {
 
 // lauch scraper concurrently using ScrapeWebsite() from scraper.go.
 func (wp *WorkerPool) Run(jobs []Job) []Result {
-	log.Printf("Starting worker pool with %d workers for %d jobs", wp.NumWorkers, len(jobs))
+	log.Printf("Starting worker pool with %d workers for %d career pages", wp.NumWorkers, len(jobs))
 	jobCh := make(chan Job, len(jobs))
 	resultCh := make(chan Result, len(jobs))
 
